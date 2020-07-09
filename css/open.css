@@ -1,0 +1,83 @@
+.maxBox {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.centerBox {
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+}
+
+.messageBox {
+	display: block;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	background: linear-gradient(45deg, #cbd4d9, transparent);
+	box-shadow: -1px 0px 16px #bababa;
+	padding: 0 10px;
+}
+
+.messageBox>li {
+	position: relative;
+	display: flex;
+	width: 100%;
+	height: auto;
+}
+
+.messageBox>li>div {
+	flex: 1;
+}
+
+.messageBox>li:nth-child(3) {
+	display: block;
+	flex-wrap: nowrap;
+}
+
+.pesonImg {
+	text-align: center;
+	padding-top: 10px;
+}
+
+.pesonImg>img {
+	width: 100px;
+}
+
+.pesonmessage {
+	flex: 1.5 !important;
+}
+
+.pesonmessage li {
+	line-height: 27px;
+}
+
+/*  插件弹窗 */
+.amap-info-close {
+	width: 25px;
+	height: 25px;
+	background: #607D8B;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 25px;
+	color: #fff;
+	right: 6px !important;
+	top: 3px;
+}
+
+/* 按钮组 */
+.Buts {
+	display: flex;
+	margin-top: 10px;
+}
+
+.Buts>button {
+	flex: 1;
+}
+
+/* 字体颜色值 */
+.txtColor-red {
+	color: #FD482C;
+}

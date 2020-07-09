@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/scrollbar.css" />
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+			}
+
+			.schoolBox {
+				position: relative;
+				width: 100%;
+				height: 100%;
+			}
+
+			.schoolCont {
+				position: relative;
+				width: 100%;
+				height: 100%;
+			}
+
+			.tabOptionBox {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				overflow: hidden;
+			}
+
+			.tabOptionBox>.tabOptionList {
+				position: relative;
+				width: 90%;
+				height: 90px;
+				border-bottom: 1px solid #d4d4d4;
+				padding: 0 5%;
+				display: flex;
+			}
+
+			.tabOptionBox>.tabOptionList::after {
+				position: absolute;
+				content: '';
+				width: 90%;
+				height: 7px;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin: auto;
+				background: #dadada;
+				z-index: -1;
+				border-radius: 15px;
+			}
+
+			.tabOptionBox>.tabOptionCont {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+				overflow: auto;
+			}
+
+			.t-option {
+				position: relative;
+				width: 20px;
+				height: 20px;
+				background: #fff;
+				margin: auto 0;
+				margin-right: 150px;
+				border-radius: 50%;
+				border: 1px solid #d4d4d4;
+			}
+
+			.t-option::after {
+				position: absolute;
+				content: '';
+				width: 15px;
+				height: 15px;
+				border-radius: 50%;
+				background: rgba(0, 0, 0, 0.45098039215686275);
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin: auto;
+			}
+
+			.t-option-active::after {
+				background: #008EFF;
+			}
+
+			.t-option::before {
+				position: absolute;
+				content: attr(data-title);
+				white-space: nowrap;
+				top: -25px;
+			}
+
+			.tc-option {
+				display: none;
+				flex: 1;
+			}
+
+			.tc-option-active {
+				display: block;
+			}
+
+			/* 信息体 */
+			.messageBox {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				display: flex;
+			}
+
+			.messageBox>.msgLeft {
+				position: relative;
+				width: 20%;
+				padding-top: 210px;
+				border-right: 1px solid #d4d4d4;
+			}
+
+			.messageBox>.msgContent {
+				flex: 1;
+			}
+
+			.messageImg {
+				position: absolute;
+				width: 170px;
+				height: 150px;
+				left: 20px;
+				top: 20px;
+				margin: auto;
+				overflow: hidden;
+				border-radius: 10px;
+			}
+
+			.messageImg>img {
+				width: 100%;
+				height: 100%;
+			}
+
+			.optinBtnBox {
+				padding: 10px 20px;
+				background: rgba(147, 137, 137, 0.3686274509803922);
+			}
+
+			.optinBtnBox>button {
+				width: 100%;
+				line-height: 40px;
+				background: #4CAF50;
+				color: #fff;
+				border: none;
+				outline: none;
+				border-radius: 5px;
+			}
+
+			.optContent {
+				width: 100%;
+				height: 100%;
+				overflow: auto;
+			}
+
+			.optContents {
+				width: 100%;
+				height: 100%;
+				position: relative;
+				/* 	display: inline-grid;
+				display: -moz-grid-line;
+				display: -webkit-inline-grid;
+				display: grid;
+				grid-template-columns: repeat(2, 50%);
+				grid-template-rows: repeat(2,50px); */
+				display: flex;
+				flex-direction: column;
+
+			}
+
+			.optContents>li {
+				height: 50px;
+				margin: 0 15px;
+				border-bottom: 2px dashed #d4d4d4;
+				display: inline-grid;
+				display: -moz-grid-line;
+				display: -webkit-inline-grid;
+				display: grid;
+				grid-template-columns: repeat(2, 50%);
+			}
+
+			.optContentText {
+				line-height: 50px;
+			}
+
+			.optitle {
+				padding: 0 10px;
+				color: #484848;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="schoolBox">
+			<div class="schoolCont">
+				<div class="tabOptionBox">
+					<div class="tabOptionList">
+						<div class="t-option t-option-active" data-title="基本信息"></div>
+						<div class="t-option" data-title="涉及师生安全的事(案)件" data-url='http://smart.gdjczn.com/index.php?m=school&c=schoolcd&ac=schoolcdPost&op=ctr&divWinEid=&actions=listform&viewsid=eac471c20c45d4a32c152a08ae3e400e&curFunctionId=9c3064f6edf0cfa8161c83337e099d52&curModuleId=47807a59cd4a1614696fefcd12649ee6&detailFlag=1'></div>
+					</div>
+					<div class="tabOptionCont">
+						<div class="tc-option tc-option-active">
+							<ul class="messageBox">
+								<li class="msgLeft">
+									<div class="optinBtnBox">
+										<button type="button">基本信息</button>
+									</div>
+								</li>
+								<li class="msgContent">
+									<div class="optContent">
+										<ul class="optContents">
+											<li>
+												<div class="optContentText">
+													<label class="optitle">标题</label><span>dahkdhahdih</span>
+												</div>
+												<div class="optContentText">
+													<label class="optitle">标题</label><span>dahkdhahdih</span>
+												</div>
+											</li>
+											<li>
+												<div class="optContentText">
+													<label class="optitle">标题</label><span>dahkdhahdih</span>
+												</div>
+												<div class="optContentText">
+													<label class="optitle">标题</label><span>dahkdhahdih</span>
+												</div>
+											</li>
+											<li>
+												<div class="optContentText">
+													<label class="optitle">标题</label><span>dahkdhahdih</span>
+												</div>
+												<div class="optContentText">
+													<label class="optitle">标题</label><span>dahkdhahdih</span>
+												</div>
+											</li>
+											<li>
+												<div class="optContentText">
+													<label class="optitle">标题</label><span>dahkdhahdih</span>
+												</div>
+												<div class="optContentText">
+													<label class="optitle">标题</label><span>dahkdhahdih</span>
+												</div>
+											</li>
+											<li>
+												<div class="optContentText">
+													<label class="optitle">标题</label><span>dahkdhahdih</span>
+												</div>
+												<div class="optContentText">
+													<label class="optitle">标题</label><span>dahkdhahdih</span>
+												</div>
+											</li>
+											<li>
+												<div class="optContentText">
+													<label class="optitle">标题</label><span>dahkdhahdih</span>
+												</div>
+												<div class="optContentText">
+													<label class="optitle">标题</label><span>dahkdhahdih</span>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</li>
+								<div class="messageImg">
+									<img src="img/qyhx.png">
+								</div>
+							</ul>
+						</div>
+						<div class="tc-option"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script src="jq/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var tab = document.querySelector('.tabOptionBox');
+			var ifram = null;
+			var elem = null;
+
+			function tabOpen(op, l, c) {
+				if (op instanceof HTMLElement) {
+					var file = op;
+					var fileL = op.children[0].children;
+					var fileC = op.children[1].children;
+					console.log(fileL, fileC)
+
+					for (let i = 0; i < fileL.length; i++) {
+						fileL[i].index = i;
+						fileL[i].onclick = function() {
+							console.log(this.getAttribute('data-url'))
+							for (j = 0; j < fileL.length; j++) {
+								fileL[j].classList.add(l.activeoff);
+								fileL[j].classList.remove(l.active);
+							}
+							fileL[i].className = l.activeoff + ' ' + l.active;
+							for (let m = 0; m < fileC.length; m++) {
+								fileC[m].className = c.activeoff;
+							}
+
+							fileC[fileL[i].index].className = c.activeoff + ' ' + c.active;
+
+							if (this.getAttribute('data-url')) {
+								var u = this.getAttribute('data-url');
+								urlopen(u, fileC[fileL[i].index])
+							} else {
+								urlopen('', fileC[fileL[i].index])
+							}
+
+						}
+					}
+				} else {
+					console.log(new Error('不是一个Dom对象'))
+				}
+
+			}
+
+			function urlopen(url, ele) {
+				if (url.length !== 0) {
+					if (ifram) {
+						return ifram;
+					} else {
+						ifram = document.createElement('iframe');
+						ifram.src = url;
+						ifram.style.border = 'none';
+						ifram.style.width = '100%';
+						ifram.style.height = '100%';
+						ele.appendChild(ifram);
+					}
+				} else {
+					if (elem) {
+						return elem;
+					} else {
+						elem = document.createElement('h1');
+						elem.innerHTML = '不是链接地址';
+						ele.appendChild(elem);
+					}
+				}
+			}
+
+			tabOpen(tab, {
+				active: 't-option-active',
+				activeoff: 't-option'
+			}, {
+				active: 'tc-option-active',
+				activeoff: 'tc-option'
+			});
+		</script>
+	</body>
+</html>

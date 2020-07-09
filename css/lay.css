@@ -1,0 +1,9 @@
+.layui-layer-title {
+	color: #fff !important;
+	background: linear-gradient(33deg, #0f48a5, #075db2);
+	border-bottom: none !important;
+}
+
+.layui-layer-page .layui-layer-content {
+	overflow-x: hidden !important;
+}

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+			}
+
+			.houeseBox {
+				position: relative;
+				width: 100%;
+				height: 100%;
+			}
+
+			.houeseCont {
+				position: relative;
+				width: 100%;
+				height: 100%;
+			}
+
+			.houeselink {
+				background: rgba(100, 100, 100, 0.1);
+				padding: 10px 20px;
+			}
+
+			.houeselink>strong {
+				position: relative;
+				margin-right: 25px;
+				cursor: pointer;
+			}
+
+			.houeselink>strong::before {
+				position: absolute;
+				color: #d4d4d4;
+				content: '>';
+				right: -20px;
+			}
+
+			.houeselink>strong:last-child::before {
+				display: none;
+			}
+
+			.houeseContList {
+				position: relative;
+				width: auto;
+				height: auto;
+				padding: 10px 20px;
+				/* background: rgba(158, 158, 158, 0.3215686274509804); */
+			}
+
+			.houeseContLists {
+				display: flex;
+				width: 100%;
+				min-height: 300px;
+			}
+
+			.houeseContLists>li:nth-child(1) {
+				flex: 1;
+			}
+
+			.houeseContLists>li:nth-child(2) {
+				width: 35%;
+			}
+
+			.houese-cengshu,
+			.houeseMsgList {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.houese-cengshu>li,
+			.houeseMsgList>li {
+				position: relative;
+				padding: 10px;
+			}
+
+			.houese-cengshu>li::before,
+			.houeseMsgList>li::before {
+				position: absolute;
+				content: '';
+				bottom: 0;
+				width: 96%;
+				height: 2px;
+				left: 0;
+				right: 0;
+				margin: auto;
+				border-bottom: 2px dashed rgba(158, 158, 158, 0.5098039215686274);
+			}
+
+			.houese-cengshu>li:last-child::before,
+			.houeseMsgList>li:last-child::before {
+				display: none;
+			}
+
+			.houese-title {
+				writing-mode: vertical-lr;
+				color: #FF5722;
+				float: left;
+				margin-right: 10px;
+				letter-spacing: 6px;
+			}
+
+			.houese-wgy,
+			.houese-ldz {
+				background: aliceblue;
+				height: 70px;
+				width: 65px;
+				float: left;
+			}
+
+			dl {
+				display: table;
+				width: 100%;
+				margin-bottom: 0;
+				margin-top: -1px;
+			}
+
+			dt {
+				display: table-cell;
+				font-weight: 500;
+				vertical-align: middle;
+				font-size: 16px;
+				width: 10%;
+				text-align: center;
+				background: #0fc38f;
+				border: 1px solid #e0e0ee;
+				border-top-color: #06a879;
+				color: #fff;
+			}
+
+			dd {
+				display: block;
+				width: 20%;
+				float: left;
+				background: #f2fcf7;
+				border: 1px solid #90eec3;
+				margin-left: -1px;
+				padding: 10px;
+				position: relative;
+				text-align: center;
+			}
+
+			dt:hover {
+				background: linear-gradient(45deg, #ff9800, #ffea31);
+			}
+
+			.dtactive {
+				background: linear-gradient(45deg, #ff9800, #ffea31);
+			}
+
+			dd:hover {
+				background: rgba(0, 188, 212, 0.16862745098039217);
+			}
+
+			.icon {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				vertical-align: -0.15em;
+				fill: currentColor;
+				overflow: hidden;
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="css/scrollbar.css" />
+	</head>
+	<body>
+		<div class="houeseBox">
+			<div class="houeseCont">
+				<div class="houeselink">
+					<strong>某某</strong>
+					<strong>某某</strong>
+					<strong>某某</strong>
+					<strong>某某</strong>
+					<strong>某某</strong>
+				</div>
+				<div class="houeseContList">
+					<ul class="houeseContLists">
+						<li>
+							<ul class="houese-cengshu">
+								<li>
+									<div class="houese-title">网格员</div>
+									<div class="houese-wgy">
+
+									</div>
+								</li>
+								<li>
+									<div class="houese-title">楼栋长</div>
+									<div class="houese-ldz">
+
+									</div>
+								</li>
+								<li>
+									<div class="" style="padding: 10px 0;">
+										<strong>楼层</strong>
+									</div>
+									<div class="" id="houeseList" style="height: 300px;overflow: auto;"></div>
+
+								</li>
+							</ul>
+						</li>
+						<li>
+							<ul class="houeseMsgList">
+								<li>
+									<!-- 房间总数 -->
+									<div class="houeseSum">
+										<style type="text/css">
+											.houeseSum,
+											.hspersonSum {
+												padding-left: 50px;
+												line-height: 50px;
+											}
+
+											.houeseSum>strong,
+											.hspersonSum>strong {
+												position: relative;
+											}
+
+											.houeseSum>strong::after,
+											.hspersonSum>strong::after {
+												position: absolute;
+												content: '';
+												top: 0;
+												left: -50px;
+												width: 40px;
+												height: 40px;
+												background: #fff;
+												bottom: 0;
+												margin: auto;
+											}
+
+											.houeseTypeList {
+												display: flex;
+												padding-top: 20px;
+											}
+
+											.houeseTypeList>li {
+												position: relative;
+												margin-left: 35px;
+											}
+
+											.zizhu::after,
+											.chuzu::after,
+											.kongzi::after {
+												position: absolute;
+												content: '';
+												top: 0;
+												left: -25px;
+												bottom: 0;
+												margin: auto;
+												width: 20px;
+												height: 20px;
+												border-radius: 3px;
+											}
+
+											.zizhu::after {
+												background: #39d53f;
+											}
+
+											.chuzu::after {
+												background: #8b57e6;
+											}
+
+											.kongzi::after {
+												background: #ffb241;
+											}
+
+											.personTypeList>li {
+												float: left;
+												line-height: 30px;
+												margin: 0 15px 15px 0;
+											}
+
+
+											.svgicon {
+												z-index: 9;
+												position: absolute;
+												top: 0;
+												bottom: 0;
+												left: -50px;
+												margin: auto;
+												width: 40px;
+												height: 40px;
+											}
+
+											.psicon {
+												position: relative;
+												display: -webkit-inline-box;
+												width: 20px;
+												height: 20px;
+											}
+										</style>
+
+										<strong>
+											房间总数：<span id="houeseSum">20</span>
+											<div class="svgicon">
+												<svg class="icon" aria-hidden="true">
+													<use xlink:href="#icon-chengshi"></use>
+												</svg>
+											</div>
+										</strong>
+									</div>
+									<div class="houeseType">
+										<ul class="houeseTypeList">
+											<li class="zizhu">自住房：<span id="">1</span></li>
+											<li class="chuzu">出租房：<span id="">6</span></li>
+											<li class="kongzi">空置房：<span id="">0</span></li>
+										</ul>
+									</div>
+								</li>
+								<li>
+									<!-- 人口数 -->
+									<div class="hspersonSum">
+										<strong>
+											总人口数：<span id="hspersonSum">20</span>
+											<div class="svgicon">
+												<svg class="icon" aria-hidden="true">
+													<use xlink:href="#icon-drxx91"></use>
+												</svg>
+											</div>
+										</strong>
+									</div>
+									<div class="personType">
+										<ul class="personTypeList">
+											<li>
+												<i class="psicon"><svg class="icon" aria-hidden="true">
+														<use xlink:href="#icon-renyuanxinxi"></use>
+													</svg></i>本市户籍
+											</li>
+											<li><i class="psicon"><svg class="icon" aria-hidden="true">
+														<use xlink:href="#icon-renyuanxinxi"></use>
+													</svg></i>非本市户籍人口</li>
+											<li><i class="psicon"><svg class="icon" aria-hidden="true">
+														<use xlink:href="#icon-renyuanxinxi"></use>
+													</svg></i>留守人员</li>
+											<li><i class="psicon"><svg class="icon" aria-hidden="true">
+														<use xlink:href="#icon-renyuanxinxi"></use>
+													</svg></i>境外人员</li>
+											<li><i class="psicon"><svg class="icon" aria-hidden="true">
+														<use xlink:href="#icon-renyuanxinxi"></use>
+													</svg></i>常住人口</li>
+											<li><i class="psicon"><svg class="icon" aria-hidden="true">
+														<use xlink:href="#icon-renyuanxinxi"></use>
+													</svg></i>空挂户人口</li>
+											<li><i class="psicon"><svg class="icon" aria-hidden="true">
+														<use xlink:href="#icon-renyuanxinxi"></use>
+													</svg></i>单位组织</li>
+											<li><i class="psicon"><svg class="icon" aria-hidden="true">
+														<use xlink:href="#icon-renyuanxinxi"></use>
+													</svg></i>党员</li>
+										</ul>
+									</div>
+								</li>
+								<li>
+									<div class="houese-title">楼栋图片</div>
+									<style type="text/css">
+										.houeseImg {
+											float: left;
+											width: 200px;
+											height: 200px;
+											background: url(img/qyhx.png) no-repeat;
+											background-size: 100% 100%;
+											overflow: hidden;
+											border-radius: 3px;
+										}
+									</style>
+									<div class="houeseImg">
+
+									</div>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script src="icon/iconfont.js" type="text/javascript" charset="utf-8"></script>
+		<script src="jq/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var houeseCon = document.getElementById('houeseList');
+			for (let i = 0; i < 10; i++) {
+				var dl = document.createElement('dl');
+				var dt = document.createElement('dt');
+				dt.innerHTML = 10 - i + 'F';
+				dl.appendChild(dt);
+				for (let j = 0; j < 12; j++) {
+					var dd = document.createElement('dd');
+					dd.innerHTML = j;
+					dl.appendChild(dd);
+				}
+				houeseCon.appendChild(dl);
+			}
+
+			$('dd').on('mousemove', function() {
+				$(this).siblings('dt').addClass('dtactive');
+				$(this).on('mouseout', function() {
+					$(this).siblings('dt').removeClass('dtactive');
+				});
+			})
+		</script>
+	</body>
+</html>

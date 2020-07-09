@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+		<link rel="stylesheet" type="text/css" href="layui-v2.5.6/layui/css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="./layer/mobile/need/layer.css" />
+		<link rel="stylesheet" type="text/css" href="css/lay.css" />
+		<link rel="stylesheet" type="text/css" href="css/open.css" />
+		<link rel="stylesheet" type="text/css" href="css/logindAmitem.css" />
+	</head>
+	<body>
+		<!-- 头部 -->
+		<header>
+			<div class="fn_title">
+				<h1>镇指挥中心</h1>
+			</div>
+			<div class="wgMessage">
+				<ul class="wgMessageBox">
+					<li>
+						<h2>网格员：</h2>
+					</li>
+					<li>
+						<h3>总数：<span>56</span></h3>
+					</li>
+					<li>
+						<h3>在线：<span>30</span></h3>
+					</li>
+					<li>
+						<h3>离线：<span>5</span></h3>
+					</li>
+					<li>
+						<h3>请假：<span>6</span></h3>
+					</li>
+				</ul>
+			</div>
+
+			<!-- 时间 -->
+			<div class="Contetnt">
+				<div class="time">
+					<div class="t1"></div>
+					<div class="t2"></div>
+				</div>
+			</div>
+		</header>
+		<div id="GDmap" class="mapContent"></div>
+		<!-- 搜索 -->
+		<div class="typeSerech">
+			<input type="text" id="typeSerech" value="" data-type="wgy" placeholder="搜索" />
+			<div class="inSerch">搜索</div>
+		</div>
+		<!-- 功能列表 -->
+		<div id="fnlismin" class="fnlismin">
+			<ul class="fnlisminBox" id="fnlisminBox"></ul>
+		</div>
+		<div id="fnlisbig" class="fnlisbig">
+			<ul class="fnlisbigBox" id="fnlisbigBox">
+				<!-- <li onclick="bangfu()"><span>帮扶</span></li> -->
+			</ul>
+		</div>
+		<!-- 底部功能栏 -->
+		<div class="butFNlis"></div>
+		<ul class="butFNlisBox">
+			<li data-title="某某"></li>
+			<li data-title="某某"></li>
+			<li data-title="某某"></li>
+			<li data-title="某某"></li>
+			<li data-title="某某"></li>
+			<li data-title="某某"></li>
+		</ul>
+		<div id="fnlismax" class="fnlismax"></div>
+
+		<!-- 地图显示方式 -->
+		<ul class="mapOption">
+			<li class="mapOptionOn" onclick="removeWxMap()">2D</li>
+			<li onclick="wxMap()">卫星</li>
+		</ul>
+		<!-- 个别功能 -->
+		<ul id="gbFnLis" class="gbFnLis">
+			<li onclick="wgQU()">网格</li>
+			<li onclick="getData(zdcanvas)">自定义图层</li>
+			<li onclick="bangfu()">帮扶</li>
+			<li id="lk">路况</li>
+			<li onclick="QiYe('qiye.html','企业')">企业</li>
+			<li onclick="QiYe('renyuan.html','人员')">人员</li>
+			<li onclick="QiYe('lou.html','楼栋',['70%','85%'])">楼栋</li>
+			<li onclick="QiYe('school.html','学校',['70%','85%'])">学校</li>
+		</ul>
+		<!-- 加载动画块 -->
+		<div id="loading">
+			<div id="loading-center">
+				<div id="loading-center-absolute">
+					<div class="object" id="object_one"></div>
+					<div class="object" id="object_two"></div>
+					<div class="object" id="object_three"></div>
+					<div class="object" id="object_four"></div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 路况示意 -->
+		<style type="text/css">
+			.road-condition-box {
+				position: fixed;
+				top: 70px;
+				right: 10%;
+				width: auto;
+				height: auto;
+				line-height: 30px;
+				background: rgba(0, 0, 0, 0.6509803921568628);
+				color: #fff;
+				border-radius: 15px;
+				display: none;
+			}
+
+			.road-condition-box>ul {
+				display: flex;
+				margin: 0 5px;
+			}
+
+			.road-condition-box>ul>span {
+				margin: 0 10px;
+			}
+
+			.road {
+				position: relative;
+				width: 35px;
+				margin-right: 2px;
+			}
+
+			.road::after {
+				position: absolute;
+				content: '';
+				width: 35px;
+				height: 5px;
+				background-color: #0000FF;
+				border-right: 2px solid #fff;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				margin: auto;
+			}
+
+			.road1::after {
+				background: #34bb39;
+			}
+
+			.road2::after {
+				background: #FFEB3B;
+			}
+
+			.road3::after {
+				background: #f63628;
+			}
+
+			.road4::after {
+				background: #a01107;
+				border: none;
+			}
+		</style>
+		<div id="road-condition-box" class="road-condition-box">
+			<ul>
+				<span>畅通</span>
+				<li class="road road1"></li>
+				<li class="road road2"></li>
+				<li class="road road3"></li>
+				<li class="road road4"></li>
+				<span>拥堵</span>
+			</ul>
+		</div>
+
+		<script src="https://a.amap.com/jsapi_demos/static/china.js"></script>
+		<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=ee296dba90e3f0614a5c26da4531d154"></script>
+		<script src="js/amap-cluster-canvas.test.js" type="text/javascript" charset="utf-8"></script>
+		<!-- <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=vt02PyFXFIxV4OoqIiIyP0vhY6vYH3KR"></script> -->
+		<script src="https://webapi.amap.com/ui/1.1/main.js"></script>
+		<script src="jq/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mock.js" type="text/javascript" charset="utf-8"></script>
+		<script src="layui-v2.5.6/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+		<script src="layer/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mapdata.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mapfn.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/pathTile.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/trackquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/lukuang.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			//import { version,sum } from './js/exper.js'
+			//window.onload = function() {
+			// 创建地图
+			var map = new AMap.Map('GDmap', {
+				resizeEnable: true, //是否监控地图容器尺寸变化
+				zoom: 15, //初始地图层级
+				center: [113.2571650932541, 22.702266706391757], //初始的地图坐标,如若没有定义此属性，会自动默认定位到你当前的城市
+				layers: [
+					// 卫星
+					// googleLayer,
+					// // 路网
+					// new AMap.TileLayer.RoadNet()
+				]
+			});
+
+			//中心点文本
+			var centerText = new AMap.Text({
+				text: '东凤镇',
+				map: map,
+				position: [113.2571650932541, 22.702266706391757],
+				animation: 'AMAP_ANIMATION_DROP',
+			});
+
+			centerText.setStyle({
+				color: 'red',
+				padding: '5px 10px',
+				fontSize: '20px',
+				border: 'none',
+				background: 'none',
+				fontWeight: 600,
+				textShadow: '5px 2px 6px #345',
+				zindex: 999
+			});
+
+			centerText.on('click', function(e) {
+				console.log(e)
+			})
+
+
+			var bass = Mock.mock('https://bass.com', {
+				'list|8': [{ //随机生成20条数据
+					'id|+1': 1, //id自增
+					'name': '@cname',
+					'icon': '',
+					'typefn': '@last',
+					'subclass': [{
+						'name': '功能支点',
+						'typefn': '@last',
+					}, {
+						'name': '功能支点',
+						'typefn': '@last',
+					}, {
+						'name': '功能支点',
+						'typefn': '@last',
+					}]
+				}],
+				'wglist|4': [{ //随机生成20条数据
+					'id|+1': 1, //id自增
+					'name': '@cname',
+					'icon': '',
+					'typefn': '@last',
+				}],
+				'Biglist|4': [{ //随机生成20条数据
+					'id|+1': 1, //id自增
+					'name': '@cname',
+					'icon': '',
+					'typefn': '@last',
+					'subclass': [{
+						'name': '功能支点',
+						'typefn': '@last',
+					}, {
+						'name': '功能支点',
+						'typefn': '@last',
+					}, {
+						'name': '功能支点',
+						'typefn': '@last',
+					}]
+				}]
+			});
+
+			// 初始化页面
+			gtMap.init('https://bass.com');
+
+			function math() { //根据经纬度生成随机坐标
+				//console.log(map.getBounds())
+				var bounds = map.getBounds();
+				var sw = bounds.getSouthWest();
+				var ne = bounds.getNorthEast();
+				var lngSpan = Math.abs(sw.lng - ne.lng);
+				var latSpan = Math.abs(ne.lat - sw.lat);
+				var point = [sw.lng + lngSpan * (Math.random() * 2), ne.lat - latSpan * (Math.random() * 2)];
+
+				return point;
+			}
+			/**
+			 * 获取高德地图
+			 * 创建地图时可传初始的参数属性
+			 */
+			// 设置一个图标对象
+			var icon = {
+				// 图标类型，现阶段只支持 image 类型
+				type: 'image',
+				// 图片 url
+				image: 'https://a.amap.com/jsapi_demos/static/demo-center/marker/express2.png',
+				// 图片尺寸
+				size: [64, 30],
+				// 图片相对 position 的锚点，默认为 bottom-center
+				anchor: 'center',
+			};
+			var textStyle = {
+				fontSize: 16,
+				fontWeight: 'normal',
+				fillColor: '#42886f',
+				strokeColor: '#fff',
+				strokeWidth: 2,
+				fold: true,
+				padding: '2, 5',
+				backgroundColor: 'rgba(0, 0, 0, 0.46)',
+				lineHeight: 18,
+				height: 'auto'
+			};
+			// var positions = [math(), math(), math(), math(), math(), math(), math(), math(), math(), math(), math(), math(),
+			// 	math(), math(), math(), math(), math(), math(), math(), math()
+			// ];
+			var positions = [];
+			for (let k = 0; k < 1000; k++) {
+				positions.push(math());
+			}
+
+			var mock = Mock.mock('https://gdmap.com', {
+				'list|20': [{ //随机生成20条数据
+					'id|+1': 1, //id自增
+					'name': '自提点1',
+					'position|1': positions,
+					'lnglat|1': positions,
+					'zooms': [10, 20],
+					'opacity': 1,
+					'zIndex': 10,
+					'fold': true,
+					'icon': icon,
+					'text': {
+						// 要展示的文字内容
+						'content': '@cname',
+						// 文字方向，有 icon 时为围绕文字的方向，没有 icon 时，则为相对 position 的位置
+						'direction': 'right',
+						// 在 direction 基础上的偏移量
+						'offset': [-20, -5],
+						// 文字样式
+						'style': textStyle
+					}
+				}]
+			});
+			// 创建一个 icon
+			var endIcon = new AMap.Icon({
+				"size": new AMap.Size(25, 34),
+				"image": "https://a.amap.com/jsapi_demos/static/demo-center/icons/dir-marker.png",
+				"imageSize": new AMap.Size(135, 40),
+				"imageOffset": new AMap.Pixel(-95, -3)
+			});
+			var mock = Mock.mock('https://gdmap.com?id=1', {
+				'list|1000': [{ //随机生成20条数据
+					'id|+1': 1, //id自增
+					'name': '@cname',
+					'position|1': positions,
+					'zooms': [10, 20],
+					'opacity': 1,
+					'zIndex': 10,
+					'fold': true,
+					// 'label': {
+					// 	'content': '@cname',
+					// 	'direction': 'right',
+					// 	'style': textStyle
+					// }
+				}]
+			});
+
+			var mocks = Mock.mock('https://gdmap.com?id=2', {
+				'list|100': [{ //随机生成20条数据
+					'id|+1': 1, //id自增
+					'name': '@cname',
+					'position|1': positions,
+					'zooms': [10, 20],
+					'opacity': 1,
+					'zIndex': 10,
+					'fold': true
+				}]
+			});
+
+			// 路径数据
+			var pathmock = Mock.mock('https://pathmap.com', {
+				'list|20': [{ //随机生成20条数据
+					'position|1': positions,
+				}]
+			});
+
+			function handleData(data) {
+				console.log(data)
+			}
+
+			sty = [{
+				icon: [{
+						title: 'xx',
+						url: 'img/juhe.svg',
+						txtSty: {}
+					},
+					{
+						title: 'xx',
+						url: 'xxxxx',
+					},
+					{
+						title: 'xx',
+						url: 'xxxxx',
+					},
+					{
+						title: 'xx',
+						url: 'xxxxx',
+					}
+				]
+			}]
+			var pas = {
+				geom: [
+					[12606465.202276966, 2601034.893394358],
+					[12607157.9128458, 2600767.3637953596],
+					[12607583.093815636, 2600456.838367951],
+					[12607864.955357438, 2600050.766655186],
+					[12608122.61371112, 2599437.2511214623],
+					[12608335.011251308, 2599054.6003772696],
+					[12608773.054567784, 2598615.3500534794],
+					[12608878.968493942, 2598480.3250898654],
+					[12609182.67762027, 2598164.5256805457],
+					[12609674.394581653, 2597574.926814034],
+					[12609817.884408632, 2597377.245669149],
+					[12610080.636693362, 2597066.7202417403],
+					[12610380.272043794, 2596559.072077348],
+					[12610657.356271328, 2596260.4899356086],
+					[12611071.895975132, 2596051.379491491],
+					[12611419.337701991, 2595608.3923540283],
+					[12611897.069128772, 2594852.70807061],
+					[12612253.195980312, 2594044.907790589],
+					[12612480.271463722, 2593626.179637443],
+					[12612683.452608498, 2593523.9170700116],
+					[12613504.937938144, 2593360.3159536556],
+					[12613680.37289097, 2593340.5694496543],
+					[12613983.732346972, 2593439.6987207117],
+					[12614435.188545283, 2593929.3734331625],
+					[12614857.980857996, 2594165.850489422],
+					[12615467.026473254, 2594287.4441287634],
+					[12616090.376602037, 2594107.3283896395],
+					[12616291.023801286, 2593901.903876123],
+					[12615922.065657262, 2593843.1539018555],
+					[12615503.039581604, 2593628.1536324304],
+					[12615471.865741411, 2593446.864692115],
+					[12615485.1246531, 2593329.5714906915],
+					[12615051.583383296, 2593199.389676893],
+					[12614397.091328602, 2592910.36216369],
+					[12614077.011272665, 2592697.1745144883],
+					[12613758.722709572, 2592322.1553444644],
+					[12613609.681870144, 2592091.922544657],
+					[12613598.53964584, 2591257.2755514057],
+					[12613949.664849658, 2590886.7829978433],
+					[12614107.935612764, 2590862.53117106],
+					[12614244.089069402, 2590843.4219139926],
+					[12614493.310720695, 2590632.9292315864],
+					[12614985.37409028, 2590121.756604929],
+					[12615663.752716312, 2589142.4071800252],
+					[12615816.626772882, 2588979.9784949194],
+					[12616396.192312911, 2588880.8314738763],
+					[12616547.55585586, 2588860.5456382236],
+					[12616877.190540338, 2588722.0035244566],
+					[12617206.825224819, 2588440.141982655],
+					[12617316.703452978, 2588043.624898426],
+					[12617259.375681764, 2587823.868442106],
+					[12616912.466829838, 2587937.203276618],
+					[12616603.23952212, 2588038.227581856],
+					[12616259.272894837, 2587995.231753445],
+					[12615623.890097218, 2587789.8072399287],
+					[12615165.267927505, 2587531.8322694665],
+					[12614826.07861449, 2587297.743870343],
+					[12614591.990215367, 2587092.3193568266],
+					[12613932.720846407, 2587044.5462141484],
+					[12613622.195418999, 2587187.865642183],
+					[12612749.245434681, 2587732.048142244],
+					[12612415.807456413, 2588132.321809171],
+					[12611961.962600969, 2589173.776319556],
+					[12611856.861687077, 2589350.5369474655],
+					[12611806.699887265, 2589486.6904040985],
+					[12610808.685585113, 2590367.903261603],
+					[12609576.837820327, 2590854.2908511027],
+					[12609069.772609994, 2591416.9851270216],
+					[12608577.709240407, 2592698.4996793657],
+					[12608162.182063196, 2593217.482257034],
+					[12607819.008206064, 2593409.752932856],
+					[12607049.4030113, 2593505.741712438],
+					[12606565.22499282, 2593733.407376428],
+					[12605984.090525273, 2594231.536008562],
+					[12605837.936749553, 2594375.010391755],
+					[12605567.719911281, 2594642.2414086116],
+					[12605329.583672237, 2595003.5323267034],
+					[12604654.392198233, 2596156.1425447636],
+					[12604575.36130399, 2596946.4152756063],
+					[12604485.10092973, 2597102.534515567],
+					[12604341.781501694, 2597243.465286468],
+					[12604095.736415101, 2597407.067672648],
+					[12604237.92908765, 2598144.0154194282],
+					[12604728.689513583, 2598443.6832746486],
+					[12605046.152832778, 2598915.323368261],
+					[12605406.794133462, 2599598.050110937],
+					[12605925.439990012, 2601039.573893789],
+					[12606465.202276966, 2601034.893394358]
+				]
+			}
+			// 墨卡托转经纬度
+			function mercator2LonLat(pixel) {
+				var paths = [];
+				pixel.forEach((item, idx) => {
+					((j) => {
+						//debugger
+						var x = j[0],
+							y = j[1];
+						var longitude = x / 20037508.34 * 180;
+						var latitude = y / 20037508.34 * 180;
+						latitude = 180 / Math.PI * (2 * Math.atan(Math.exp(latitude * Math.PI / 180)) - Math.PI / 2);
+						//return [longitude, latitude];
+						paths.push([longitude, latitude]);
+					})(item);
+				});
+				return paths;
+			}
+			//mercator2LonLat(pas.geom);
+
+			function drawpolygon(arr, sty, exd) {
+				// debugger
+				//console.log(inMap)
+				var pl = new Array();
+				var lnglat = [];
+				var sty = sty || {};
+				for (var i = 0; i < arr.length; i++) {
+					//console.log(arr[i])
+					pl.push(new AMap.LngLat(arr[i][0], arr[i][1]));
+				}
+
+				maxPolygon = new AMap.Polygon({
+					path: pl, //设置多边形边界路径  
+					strokeColor: "#ff1100", //线颜色  
+					//strokeOpacity: 0.2, //线透明度   
+					strokeWeight: 5, //线宽   
+					fillColor: '', //填充色  
+					fillOpacity: 0.05 //填充透明度  
+				});
+				maxPolygon.setExtData(exd);
+
+				maxPolygon.on('click', function(e) {
+					console.log('图层数据,', e.target.getExtData());
+				});
+
+				maxPolygon.setMap(map);
+			}
+
+			drawpolygon(mercator2LonLat(pas.geom), {}, {});
+
+			function bangfu() {
+
+				dataCont('http://192.168.0.147:81/center/bangfu/cun?params=%7Bpage%3A1%2CdtflId%3A1%7D', map, 'GET', 'bangfu',
+					gtMap.getAllDataType, sty[0].icon[0]);
+
+				// $.ajax({
+				// 	url: 'http://192.168.0.147:81/center/bangfu/cun?params=%7Bpage%3A1%2CdtflId%3A1%7D',
+				// 	type: 'GET',
+				// 	dataType: 'JSON',
+				// 	success: function(res) {
+				// 		console.log(res);
+				// 	},
+				// 	error: function(e) {
+				// 		console.log(new Error(), e);
+				// 	}
+				// });
+			}
+
+			var lkda = null;
+			$(function() {
+				// 左侧菜单按钮
+				$('.fnlisminBox').on('click', 'li', function() {
+					var dataTy = $(this).data('type');
+					var iptTy = $('#typeSerech').data('type');
+					if ($(this).hasClass('pitch_on')) {
+						$(this).removeClass('pitch_on');
+						console.log(remarrMarker);
+						gtMap.removeMacks(dataTy);
+						$('#typeSerech').attr('data-type', '');
+						$('#typeSerech').val('');
+						$('#typeSerech').attr('placeholder', '请先选择项目。');
+						$(this).find('p').find('em').removeClass('emActiveOn');
+
+						$(this).find('p').find('em').each(function(idx, item) {
+							var ty = $(item).attr('data-type');
+							gtMap.removeMacks(ty);
+						});
+						//emActiveOn
+						//map.destroy(); //销毁地图
+					} else {
+						$(this).addClass('pitch_on');
+						// $('#typeSerech').attr('data-type', dataTy);
+						// $('#typeSerech').attr('placeholder', dataTy);
+						//dataCont('https://gdmap.com?id=1', map, gtMap.getBass);
+						//dataCont('https://gdmap.com?id=1', map, 'GET', dataTy, gtMap.getAllDataType, sty[0].icon[0]);
+						$(this).find('p').find('em')[0].click();
+						//dataCont('http://192.168.0.147:81/center/bangfu/pinkunhu', map, 'GET', dataTy, gtMap.getAllDataType, sty[0].icon[0]);
+						//dataCont('http://192.168.0.104:8080/admin/jcsj/pkcjbqk/list', map, gtMap.getAllDataType);
+						// gtMap.getTaril(map, 'https://pathmap.com', 'GET');
+						//gtMap.getPath('http://192.168.0.104:8080/admin/map/grid/findGriddataById?ids=1;0;204;188;205', map);
+					}
+				});
+
+				// setInterval(function() {
+				// 	dataCont('https://gdmap.com?id=1', map, 'POST', gtMap.getAllDataType);
+				// }, 5000)
+
+				// 右侧菜单按钮
+				$('.fnlisbigBox').on('click', 'li', function() {
+					var dataTy = $(this).data('type');
+					var iptTy = $('#typeSerech').data('type');
+
+					if ($(this).hasClass('pitch_on')) {
+						$(this).removeClass('pitch_on');
+						$('#typeSerech').val('');
+						gtMap.removeMacks(dataTy);
+						$(this).find('p').find('em').removeClass('emActiveOn');
+						$(this).find('p').find('em').each(function(idx, item) {
+							var ty = $(item).attr('data-type');
+							gtMap.removeMacks(ty);
+						});
+					} else {
+						$(this).addClass('pitch_on');
+						$(this).find('p').find('em')[0].click();
+					}
+				});
+
+				// $('.gbFnLis').on('click', 'li', function() {
+				// 	$(this).toggleClass('gbfnActive');
+				// });
+				// 底部菜单按钮
+				$('.butFNlisBox').on('click', 'li', function() {
+					if ($(this).hasClass('pitch_on')) {
+						$(this).removeClass('pitch_on');
+						if (expath.length > 0) { //删除网格
+							map.remove(expath);
+							map.remove(exWgText);
+							expath = [];
+							exWgText = [];
+						}
+					} else {
+						$(this).addClass('pitch_on');
+						gtMap.getPath('http://192.168.0.147:81/center/demo/findGridList', map);
+					}
+				});
+
+				// 地图形式切换
+				$('.mapOption').on('click', 'li', function() {
+					$(this).addClass('mapOptionOn').siblings().removeClass('mapOptionOn');
+				});
+
+				// 搜索
+				$('.inSerch').on('click', function() {
+					var ty = $('#typeSerech').attr('data-type');
+					var val = $('#typeSerech').val();
+					if (val) {
+						gtMap.serchData('https://gdmap.com?id=2', 'GET', map, ty, val);
+					} else {
+						layer.msg('请输入你要搜索的信息');
+					}
+					//console.log(ty)
+
+				});
+
+				//路况
+				$('#lk').on('click', function() {
+					if ($(this).hasClass('gbfnActive')) {
+						$(this).removeClass('gbfnActive');
+						lkda.getlu().hide();
+						$('#road-condition-box').hide();
+					} else {
+						$(this).addClass('gbfnActive');
+						if (!lkda) {
+							lkda = new LuKuang();
+							lkda.luDate(map);
+							lkda.getlu().setMap(map);
+							$('#road-condition-box').show();
+						} else {
+							lkda.getlu().reload();
+							lkda.getlu().show();
+							$('#road-condition-box').show();
+							return lkda;
+						}
+					}
+				});
+			});
+
+			let googleLayer = new AMap.TileLayer({
+				getTileUrl: 'https://mt{1,2,3,0}.google.cn/vt/lyrs=s&hl=zh-CN&gl=cn&x=[x]&y=[y]&z=[z]&s=Galile'
+			}); //谷歌卫星图
+			// 路网
+			let luwang = new AMap.TileLayer.RoadNet();
+
+			function wxMap() {
+				map.add([googleLayer]);
+			};
+
+			function removeWxMap() {
+				map.remove([googleLayer]);
+			};
+
+			function wgQU() { //网格数据
+				if (expath.length > 0) { //删除网格
+					map.remove(expath);
+					map.remove(exWgText);
+					expath = [];
+					exWgText = [];
+				} else {
+					gtMap.getPath('http://192.168.0.147:81/center/demo/findGridList', map);
+				}
+			}
+
+			function QiYe(url, tl, ...wh) {
+				console.log(wh)
+				var WH = wh.length == 0 ? ['100%', '100%'] : wh[0];
+				console.log(WH)
+				layer.open({
+					type: 2,
+					title: tl,
+					shadeClose: true,
+					maxmin: true, //开启最大化最小化按钮
+					shade: 0.5,
+					scrollbar: false, //屏蔽滚动
+					area: WH,
+					content: url,
+					success: function(res) {
+						var qymap = new AMap.Map('qy_map', {
+							resizeEnable: true, //是否监控地图容器尺寸变化
+							zoom: 15, //初始地图层级
+							center: [113.2571650932541, 22.702266706391757], //初始的地图坐标,如若没有定义此属性，会自动默认定位到你当前的城市
+						});
+					}
+				});
+			}
+
+			// 自定义图层
+			var zidingyi = null;
+
+			function zdcanvas(po) {
+
+				if (!zidingyi) {
+					zidingyi = document.createElement('canvas');
+					zidingyi.width = map.getSize().width;
+					zidingyi.height = map.getSize().height;
+				}
+				// 创建一个自定义图层
+
+				AMap.plugin('AMap.CustomLayer', function() {
+					var customLayer = new AMap.CustomLayer(zidingyi, {
+						zIndex: 12,
+						alwaysRender: true, //缩放过程中是否重绘，复杂绘制建议设为false
+						zooms: [3, 18] // 设置可见级别，[最小级别，最大级别]
+					});
+
+					var onRender = function() {
+						var retina = AMap.Browser.retina;
+						var size = map.getSize(); //resize
+						var width = size.width;
+						var height = size.height;
+						zidingyi.style.width = width + 'px'
+						zidingyi.style.height = height + 'px'
+						if (retina) { //高清适配
+							width *= 2;
+							height *= 2;
+						}
+						zidingyi.width = width;
+						zidingyi.height = height; //清除画布
+						var ctx = zidingyi.getContext("2d");
+						ctx.fillStyle = '#08f';
+						ctx.strokeStyle = '#fff';
+						ctx.beginPath();
+						for (var i = 0; i < po.length; i += 1) {
+							var center = po[i];
+							var pos = map.lngLatToContainer(center.center);
+							var r = po[i].radius;
+							if (retina) {
+								pos = pos.multiplyBy(2);
+								r *= 2
+							}
+							ctx.moveTo(pos.x + r, pos.y)
+							ctx.arc(pos.x, pos.y, r, 0, 2 * Math.PI);
+						}
+						ctx.lineWidth = retina ? 6 : 3
+						ctx.closePath();
+						ctx.stroke();
+						ctx.fill();
+					}
+					customLayer.render = onRender;
+					customLayer.setMap(map);
+					//map.add(customLayer);
+				});
+			}
+
+			function getData(callback) {
+				for (let k = 0; k < 100; k++) {
+					positions.push(math());
+				}
+				AMap.plugin('AMap.DistrictSearch', function() {
+					var search = new AMap.DistrictSearch();
+					search.search('中国', function(status, data) {
+						if (status === 'complete') {
+							var positionsli = []
+							// var provinces = data['districtList'][0]['districtList']
+							for (var i = 0; i < positions.length; i += 1) {
+								positionsli.push({
+									center: positions[i],
+									radius: Math.max(2, Math.floor(Math.random() * 10))
+								})
+							}
+							callback(positionsli)
+						}
+					});
+				});
+			}
+
+
+			// 监控地图发生变化
+			//绑定地图移动与缩放事件
+			map.on('moveend', logMapBounds);
+			map.on('zoomend', logMapBounds);
+
+			//显示当前地图边界范围坐标
+			function logMapBounds() {
+				var bounds = map.getBounds();
+				console.log(bounds.northeast.toString(), bounds.southwest.toString())
+			}
+
+			// 数字时间
+			(function displayTime() {
+				var elt = $('.t2');
+				var now = new Date();
+				elt.html(now.toLocaleTimeString('chinese', {
+					hour12: false
+				}));
+				setTimeout(displayTime, 1000);
+			})();
+			// 获取年月日和星期
+			(function() {
+				var date = new Date();
+				let nian, yue, ri, xq = null;
+				nian = date.getFullYear();
+				yue = date.getMonth() + 1;
+				ri = date.getDate();
+				xq = date.getDay(); //星期
+
+				if (yue < 10) {
+					yue = '0' + yue;
+				}
+				if (ri < 10) {
+					ri = '0' + ri;
+				}
+
+				switch (xq) {
+					case 0:
+						xq = "星期天";
+						break;
+					case 1:
+						xq = "星期一";
+						break;
+					case 2:
+						xq = "星期二";
+						break;
+					case 3:
+						xq = "星期三";
+						break;
+					case 4:
+						xq = "星期四";
+						break;
+					case 5:
+						xq = "星期五";
+						break;
+					case 6:
+						xq = "星期六";
+				}
+
+				$('.t1').html(nian + '年' + yue + '月' + ri + '日' + '  ' + xq);
+			})();
+		</script>
+	</body>
+</html>

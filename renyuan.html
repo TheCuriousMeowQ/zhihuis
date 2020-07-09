@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+			}
+
+			.portraitBox {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(45deg, black, #2196F3);
+			}
+
+			.portraitContlist {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				display: flex;
+			}
+
+			.portraitContlist>li {
+				position: relative;
+				flex: 1;
+				padding: 10px;
+			}
+
+			.portraitContlist>li:nth-child(1) {
+				/* background: #182675; */
+			}
+
+			.portraitContlist>li:nth-child(2) {
+				/* background: #182675; */
+			}
+
+			.portraitContlist>li:nth-child(3) {
+				/* background: #182675; */
+				flex: 2;
+			}
+
+			.portraitContBox {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.portraitContBox1>li {
+				flex: 1;
+			}
+
+			.portraitContBox1>li:nth-child(1),
+			.portraitContBox1>li:nth-child(2) {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.portraitContBox1>li>strong {
+				color: #fff;
+				padding-bottom: 10px;
+			}
+
+			.jiekoutu {
+				position: relative;
+				flex: 1;
+				border-radius: 5px;
+				overflow: hidden;
+			}
+
+			.jiegoutuCont {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+			}
+
+			.portraitContBox2>li:nth-child(1) {
+				height: 20%;
+			}
+
+			.portraitContBox2>li:nth-child(2) {
+				position: relative;
+				flex: 1;
+				margin-top: 15px;
+			}
+
+			.personnMsgka {
+				width: 96%;
+				height: 96%;
+				background: linear-gradient(45deg, #009688, transparent);
+				display: flex;
+				padding: 2%;
+				color: #fff;
+				border-radius: 3px;
+			}
+
+			.personnMsgka>div:nth-child(1) {
+				width: 30%;
+			}
+
+			.personnMsgka>div:nth-child(2) {
+				position: relative;
+				flex: 1;
+				padding-left: 10px;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.personnMsgkaImg {
+				overflow: hidden;
+			}
+
+			.personnMsgkaImg>img {
+				width: 100%;
+				height: 100%;
+			}
+
+			.personnMsgXq>em {
+				margin-top: 2%;
+			}
+
+			.personnMsgXq>em:nth-child(1) {
+				margin-bottom: 12%;
+			}
+
+			.kapian {
+				position: relative;
+				width: 60%;
+				height: auto;
+				margin: 10% auto;
+			}
+
+			.kapian>img {
+				width: 100%;
+				animation: mv3 0.8s;
+				animation-delay: 0s;
+				animation-fill-mode: forwards;
+				opacity: 0;
+			}
+
+			@keyframes mv3 {
+				from {
+					transform: translate(0, 0);
+					transform: scale(0);
+					transform-origin: bottom;
+					opacity: 0;
+
+				}
+
+				to {
+					transform: translate(0, 0);
+					transform: scale(1);
+					transform-origin: bottom;
+					opacity: 1;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="portraitBox">
+			<ul class="portraitContlist">
+				<li>
+					<ul class="portraitContBox portraitContBox1">
+						<li>
+							<strong>人员关系图</strong>
+							<div class="jiekoutu">
+								<div id="jiegou" class="jiegoutuCont">
+
+								</div>
+							</div>
+						</li>
+						<li>
+							<strong>所在地</strong>
+							<div class="jiekoutu">
+								<div id="jiegoumap" class="jiegoutuCont">
+
+								</div>
+							</div>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<ul class="portraitContBox portraitContBox2">
+						<li>
+							<!-- 人员信息卡 -->
+							<div class="personnMsgka">
+								<div class="personnMsgkaImg">
+									<img src="img/qyhx.png">
+								</div>
+								<div class="personnMsgXq">
+									<em>王文 男 23岁</em>
+									<em>身份证：361173137183178</em>
+									<em>联系方式：27812910</em>
+									<em>现住址：道具哦阿姐东京</em>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="kapian">
+								<img src="img/huaman.png">
+							</div>
+							<style type="text/css">
+								.biaoqian {
+									position: absolute;
+									width: 100%;
+									height: 80%;
+									left: 0;
+									top: 0;
+									bottom: 0;
+									right: 0;
+									margin: auto;
+								}
+							</style>
+							<div id="bqList" class="biaoqian">
+
+							</div>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<!-- <ul class="portraitContBox  portraitContBox3">
+						<li></li>
+						<li></li>
+					</ul> -->
+					<style type="text/css">
+						.businessOptionBox {
+							display: flex;
+							width: 100%;
+							height: 100%;
+							flex-direction: column;
+						}
+
+						.businessOptionBox>li:nth-child(1) {
+							position: relative;
+							flex: 1;
+							display: flex;
+							padding-top: 50px;
+						}
+
+						.businessOptionBox>li:nth-child(1)::after {
+							position: absolute;
+							content: '个人详细档案卡';
+							line-height: 55px;
+							padding-left: 15px;
+							color: #fff;
+							top: 0;
+							left: 0;
+							font-size: 18px;
+						}
+
+						.qy-map {
+							width: 100%;
+							height: 100%;
+						}
+
+						.tabOption-left {
+							position: relative;
+							width: 20%;
+						}
+
+						.tab-l {
+							margin: 10px auto;
+							width: 50%;
+							height: 30px;
+							background: #5762a0;
+							border-radius: 5px;
+							color: #fff;
+							line-height: 30px;
+							text-align: center;
+						}
+
+						.tab-l:hover {
+							color: aquamarine;
+							cursor: pointer;
+						}
+
+						.tabOption-content {
+							position: relative;
+							flex: 1;
+							padding: 10px;
+							color: #fff;
+							padding-right: 25px;
+						}
+
+						.tab-c {
+							display: none;
+							width: 100%;
+							height: 100%;
+						}
+
+						.tabc-active {
+							display: block;
+						}
+
+						.tab-active {
+							background: #007DDB;
+						}
+
+						.businessOptionBox>li:nth-child(2) {
+							height: 45%;
+							width: 100%;
+							display: flex;
+							flex-direction: column;
+						}
+
+						.hj-title {
+							position: relative;
+							color: #fff;
+							font-size: 18px;
+							width: 96%;
+							padding: 0 2%;
+							padding-bottom: 10px;
+						}
+
+						.hj-title::before {
+							position: absolute;
+							content: '';
+							width: 96%;
+							height: 3px;
+							bottom: 0;
+							background: linear-gradient(45deg, #0067b9, transparent);
+						}
+
+						.hjContent {
+							flex: 1;
+							padding: 0 2%;
+							overflow-x: hidden;
+							overflow-y: auto;
+						}
+
+						.hjContent>li {
+							margin-top: 10px;
+							padding: 5px 5px;
+							border: 1px solid #fff;
+							border-radius: 3px;
+						}
+
+						.hjContent>li>h4 {
+							color: #fff;
+						}
+
+						.hjContent>li>span {
+							color: #dcdcdc;
+						}
+
+						/* 选项内容 */
+						.bassmsgBox {
+							width: 100%;
+							height: 100%;
+							position: relative;
+							display: inline-grid;
+							display: -moz-grid-line;
+							display: -webkit-inline-grid;
+							display: grid;
+							grid-template-columns: repeat(2, 50%);
+							grid-template-rows: repeat(0, 50px);
+							border: 1px solid #fff;
+							border-radius: 3px;
+						}
+
+						.inspection-result {
+							position: relative;
+							width: 100%;
+						}
+
+						.inspection-result>button {
+							background: #737373;
+							border: none;
+							outline: none;
+							padding: 6px;
+							border-radius: 3px;
+							color: #dedede;
+						}
+
+						.inspection-result>button:hover {
+							color: #fff;
+							cursor: pointer;
+						}
+
+						.inspection-results {
+							margin: 15px 0;
+						}
+
+						.inResult-butny {
+							color: #fff !important;
+							background: #007DDB !important;
+						}
+					</style>
+					<ul class="businessOptionBox">
+						<li class="tabOption">
+							<div class="tabOption-left">
+								<div class="tab-l tab-active">基本信息</div>
+								<div class="tab-l">计生信息</div>
+								<div class="tab-l">劳动保障</div>
+								<div class="tab-l">民政信息</div>
+								<div class="tab-l">重点少年</div>
+								<div class="tab-l">重点人群</div>
+								<div class="tab-l">住房信息</div>
+							</div>
+							<div class="tabOption-content">
+								<div class="tab-c tabc-active">
+									<ul class="bassmsgBox">
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+									</ul>
+								</div>
+								<div class="tab-c">从业人员</div>
+								<div class="tab-c">税金情况</div>
+								<div class="tab-c">巡查周期</div>
+								<div class="tab-c">
+									<div class="inspection-result">
+										<button type="button">是否含有爆竹</button>
+										<button type="button">市场监管</button>
+										<button type="button">门前三包</button>
+										<button type="button">消防安全</button>
+									</div>
+									<div class="inspection-results">
+									</div>
+								</div>
+								<div class="tab-c">复工备案</div>
+							</div>
+						</li>
+						<li>
+							<div class="hj-title">痕迹化信息</div>
+							<ul class="hjContent">
+								<li>
+									<h4>1、住房信息</h4>
+									<span>抛开破大家的急啊大家跑就怕见到帕加垫片</span>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<script src="js/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=ee296dba90e3f0614a5c26da4531d154"></script>
+		<script type="text/javascript">
+			// 人员标签
+			function bq() {
+				var box = document.getElementById('bqList');
+				for (let i = 0; i < 6; i++) {
+					var div = document.createElement('div');
+					div.style.position = 'absolute';
+					div.style.padding = '5px 20px';
+					div.style.border = '2px solid #fff';
+					div.style.borderRadius = '15px';
+					div.style.cursor = 'pointer';
+					div.style.color = '#fff';
+					div.style.fontSize = '12px';
+					div.innerHTML = '标签';
+
+					if (i % 2) {
+
+						var k = i * 30 - 30;
+						div.style.left = 0;
+						div.style.top = k + 'px';
+					} else {
+						var k = i * 30;
+						div.style.right = 0;
+						div.style.top = k + 'px';
+					}
+
+					box.appendChild(div);
+				}
+			}
+
+			bq();
+
+			var qymap = new AMap.Map('jiegoumap', {
+				resizeEnable: true, //是否监控地图容器尺寸变化
+				zoom: 15, //初始地图层级
+				center: [113.2571650932541, 22.702266706391757], //初始的地图坐标,如若没有定义此属性，会自动默认定位到你当前的城市
+			});
+
+			var marker = new AMap.Marker({
+				position: new AMap.LngLat(113.2571650932541, 22.702266706391757),
+				offset: new AMap.Pixel(-10, -10),
+				zoom: 13,
+			});
+			qymap.add(marker);
+
+
+			var myChart = echarts.init(document.getElementById('jiegou'));
+			option = {
+				title: {
+					text: ''
+				},
+				tooltip: {
+					formatter: function(x) {
+						return x.data.des;
+					}
+				},
+				series: [{
+					type: 'graph',
+					layout: 'force',
+					symbolSize: 60,
+					roam: true,
+					edgeSymbol: ['circle', 'arrow'],
+					edgeSymbolSize: [4, 10],
+					edgeLabel: {
+						normal: {
+							textStyle: {
+								fontSize: 20
+							}
+						}
+					},
+
+					force: {
+						repulsion: 2500,
+						edgeLength: [10, 50]
+					},
+					draggable: true,
+					itemStyle: {
+						normal: {
+							color: '#4b565b'
+						}
+					},
+					lineStyle: {
+						normal: {
+							width: 2,
+							color: '#fff'
+						}
+					},
+					edgeLabel: {
+						normal: {
+							show: true,
+							formatter: function(x) {
+								return x.data.name;
+							}
+						}
+					},
+					label: {
+						normal: {
+							show: true,
+							textStyle: {}
+						}
+					},
+					data: [{
+						name: '侯亮平',
+						des: '最高检反贪局侦查处处长，汉东省人民检察院副检察长兼反贪局局长。<br/>经过与腐败违法分子的斗争，最终将一批腐败分子送上了审判台，<br/>正义战胜邪恶，自己也迎来了成长。',
+						symbolSize: 80,
+						itemStyle: {
+							normal: {
+								color: '#0088ff',
+							}
+						}
+					}, {
+						name: '吴惠芬',
+						des: '最高检反贪局侦查处处长侯亮平的妻子，汉东大学明史教授。',
+						itemStyle: {
+							normal: {
+								color: '#0088ff'
+							}
+						}
+					}, {
+						name: '欧阳菁',
+						itemStyle: {
+							normal: {
+								color: '#cc3139'
+							}
+						}
+					}, {
+						name: '吴心怡',
+						itemStyle: {
+							normal: {
+								color: '#f29900'
+							}
+						}
+					}],
+					links: [{
+						source: '吴惠芬',
+						target: '侯亮平',
+						name: '夫妻',
+						itemStyle: {
+							text: {
+								color: 'white'
+							}
+						}
+					}, {
+						source: '侯亮平',
+						target: '吴惠芬',
+						name: '夫妻',
+						itemStyle: {
+							text: {
+								color: 'white'
+							}
+						}
+					}, {
+						source: '欧阳菁',
+						target: '侯亮平',
+						name: '情人'
+					}, {
+						source: '吴心怡',
+						target: '吴惠芬',
+						name: '姐妹'
+					}, {
+						source: '欧阳菁',
+						target: '吴惠芬',
+						name: '情敌'
+					}]
+				}]
+			};
+			myChart.setOption(option);
+		</script>
+	</body>
+</html>

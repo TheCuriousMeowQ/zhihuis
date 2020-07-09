@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+			}
+
+			.businessBox {
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(45deg, #292525, #3F51B5);
+				background-size: 100% 100%;
+				margin: 0 auto;
+			}
+
+			.businessContBox {
+				display: flex;
+				width: 100%;
+				height: 100%;
+			}
+
+			.businessContBox>li:nth-child(1) {
+				width: 27%;
+			}
+
+			.businessContBox>li:nth-child(2) {
+				flex: 1;
+			}
+
+			.businessMsg {
+				display: flex;
+				width: 96%;
+				height: 95%;
+				flex-direction: column;
+				padding: 2%;
+			}
+
+			.businessMsg>li {
+				position: relative;
+				flex: 1;
+				overflow: hidden;
+				border-radius: 3px;
+			}
+
+			.businessMsg>li:nth-child(1) {
+				position: relative;
+				padding-bottom: 10px;
+				padding-top: 40px;
+			}
+
+			.businessMsg>li:nth-child(1)::after {
+				position: absolute;
+				content: '企业画像图';
+				background: url(img/kjbg.jpg) no-repeat;
+				width: 100%;
+				line-height: 35px;
+				color: #fff;
+				top: 0;
+				left: 0;
+				font-size: 18px;
+			}
+
+			.businessMsg>li:nth-child(1)>img {
+				width: 100%;
+				height: 100%;
+				/* max-width: 100%; */
+				/* max-height: 100%; */
+				vertical-align: middle;
+				object-fit: none;
+			}
+
+			.businessMsg>li:nth-child(2) {
+				padding-top: 40px;
+			}
+
+			.businessMsg>li:nth-child(2)::after {
+				position: absolute;
+				content: '企业所在地';
+				background: url(img/kjbg.jpg) no-repeat;
+				width: 100%;
+				line-height: 35px;
+				color: #fff;
+				top: 0;
+				left: 0;
+				font-size: 18px;
+			}
+
+			.businessOptionBox {
+				display: flex;
+				width: 100%;
+				height: 100%;
+				flex-direction: column;
+			}
+
+			.businessOptionBox>li:nth-child(1) {
+				position: relative;
+				flex: 1;
+				display: flex;
+				padding-top: 50px;
+			}
+
+			.businessOptionBox>li:nth-child(1)::after {
+				position: absolute;
+				content: '企业详细档案';
+				line-height: 55px;
+				padding-left: 15px;
+				color: #fff;
+				top: 0;
+				left: 0;
+				font-size: 18px;
+			}
+
+			.qy-map {
+				width: 100%;
+				height: 100%;
+			}
+
+			.tabOption-left {
+				position: relative;
+				width: 20%;
+			}
+
+			.tab-l {
+				margin: 10px auto;
+				width: 50%;
+				height: 30px;
+				background: #5762a0;
+				border-radius: 5px;
+				color: #fff;
+				line-height: 30px;
+				text-align: center;
+			}
+
+			.tab-l:hover {
+				color: aquamarine;
+				cursor: pointer;
+			}
+
+			.tabOption-content {
+				position: relative;
+				flex: 1;
+				padding: 10px;
+				color: #fff;
+				padding-right: 25px;
+			}
+
+			.tab-c {
+				display: none;
+				width: 100%;
+				height: 100%;
+			}
+
+			.tabc-active {
+				display: block;
+			}
+
+			.tab-active {
+				background: #007DDB;
+			}
+
+			.businessOptionBox>li:nth-child(2) {
+				height: 45%;
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.hj-title {
+				position: relative;
+				color: #fff;
+				font-size: 18px;
+				width: 96%;
+				padding: 0 2%;
+				padding-bottom: 10px;
+			}
+
+			.hj-title::before {
+				position: absolute;
+				content: '';
+				width: 96%;
+				height: 3px;
+				bottom: 0;
+				background: linear-gradient(45deg, #0067b9, transparent);
+			}
+
+			.hjContent {
+				flex: 1;
+				padding: 0 2%;
+				overflow-x: hidden;
+				overflow-y: auto;
+			}
+
+			.hjContent>li {
+				margin-top: 10px;
+				padding: 5px 5px;
+				border: 1px solid #fff;
+				border-radius: 3px;
+			}
+
+			.hjContent>li>h4 {
+				color: #fff;
+			}
+
+			.hjContent>li>span {
+				color: #dcdcdc;
+			}
+
+			/* 选项内容 */
+			.bassmsgBox {
+				width: 100%;
+				height: 100%;
+				position: relative;
+				display: inline-grid;
+				display: -moz-grid-line;
+				display: -webkit-inline-grid;
+				display: grid;
+				grid-template-columns: repeat(2, 50%);
+				grid-template-rows: repeat(0, 50px);
+				border: 1px solid #fff;
+				border-radius: 3px;
+			}
+
+			.inspection-result {
+				position: relative;
+				width: 100%;
+			}
+
+			.inspection-result>button {
+				background: #737373;
+				border: none;
+				outline: none;
+				padding: 6px;
+				border-radius: 3px;
+				color: #dedede;
+			}
+
+			.inspection-result>button:hover {
+				color: #fff;
+				cursor: pointer;
+			}
+
+			.inspection-results {
+				margin: 15px 0;
+				color: #00ff0a;
+			}
+
+			.inResult-butny {
+				color: #fff !important;
+				background: #007DDB !important;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="businessBox">
+			<ul class="businessContBox">
+				<li>
+					<ul class="businessMsg">
+						<li>
+							<!-- 企业图像 -->
+							<img src="./img/qyhx.png">
+						</li>
+						<li>
+							<!-- 所在地 -->
+							<div id="qy_map" class="qy-map">
+
+							</div>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<ul class="businessOptionBox">
+						<li class="tabOption">
+							<div class="tabOption-left">
+								<div class="tab-l tab-active">基本信息</div>
+								<div class="tab-l">从业人员</div>
+								<div class="tab-l">税金情况</div>
+								<div class="tab-l">巡查周期</div>
+								<div class="tab-l">巡查结果</div>
+								<div class="tab-l">复工备案</div>
+							</div>
+							<div class="tabOption-content">
+								<div class="tab-c tabc-active">
+									<ul class="bassmsgBox">
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+										<li></li>
+									</ul>
+								</div>
+								<div class="tab-c">从业人员</div>
+								<div class="tab-c">税金情况</div>
+								<div class="tab-c">巡查周期</div>
+								<div class="tab-c">
+									<div class="inspection-result">
+										<button type="button">是否含有爆竹</button>
+										<button type="button">市场监管</button>
+										<button type="button">门前三包</button>
+										<button type="button">消防安全</button>
+									</div>
+									<div class="inspection-results">
+									</div>
+								</div>
+								<div class="tab-c">复工备案</div>
+							</div>
+						</li>
+						<li>
+							<div class="hj-title">痕迹化信息</div>
+							<ul class="hjContent">
+								<li>
+									<h4>1、住房信息</h4>
+									<span>抛开破大家的急啊大家跑就怕见到帕加垫片</span>
+								</li>
+								<li>
+									<h4>1、住房信息</h4>
+									<span>抛开破大家的急啊大家跑就怕见到帕加垫片</span>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=ee296dba90e3f0614a5c26da4531d154"></script>
+		<script src="jq/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var tab = document.querySelector('.tabOption');
+
+			function mytay(op, l, c) {
+				if (op instanceof HTMLElement) {
+					var file = op;
+					var fileL = op.children[0].children;
+					var fileC = op.children[1].children;
+					console.log(fileL, fileC)
+
+					for (let i = 0; i < fileL.length; i++) {
+						fileL[i].index = i;
+						fileL[i].onclick = function() {
+							for (j = 0; j < fileL.length; j++) {
+								fileL[j].classList.add(l.activeoff);
+								fileL[j].classList.remove(l.active);
+							}
+							fileL[i].className = l.activeoff + ' ' + l.active;
+							for (let m = 0; m < fileC.length; m++) {
+								fileC[m].className = c.activeoff;
+							}
+
+							fileC[fileL[i].index].className = c.activeoff + ' ' + c.active;
+						}
+					}
+				} else {
+					try {} catch (e) {
+						//TODO handle the exception
+						new Error('不是一个Dom对象');
+					}
+				}
+
+			}
+
+			mytay(tab, {
+				active: 'tab-active',
+				activeoff: 'tab-l'
+			}, {
+				active: 'tabc-active',
+				activeoff: 'tab-c'
+			});
+
+
+			var qymap = new AMap.Map('qy_map', {
+				resizeEnable: true, //是否监控地图容器尺寸变化
+				zoom: 15, //初始地图层级
+				center: [113.2571650932541, 22.702266706391757], //初始的地图坐标,如若没有定义此属性，会自动默认定位到你当前的城市
+			});
+
+			var marker = new AMap.Marker({
+				position: new AMap.LngLat(113.2571650932541, 22.702266706391757),
+				offset: new AMap.Pixel(-10, -10),
+				zoom: 13,
+			});
+			qymap.add(marker);
+
+			$('.inspection-result').on('click', 'button', function() {
+				$(this).addClass('inResult-butny').siblings().removeClass('inResult-butny');
+				jiancha();
+			});
+
+			function jiancha() {
+				$('.inspection-results').html('');
+				$('.inspection-results').append('<div>合格<div>');
+			}
+		</script>
+	</body>
+</html>

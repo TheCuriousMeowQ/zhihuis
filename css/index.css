@@ -1,0 +1,706 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+/* 地图左下logo */
+.amap-logo {
+	right: 0 !important;
+	left: auto !important;
+	display: none !important;
+}
+
+.amap-copyright {
+	right: 70px !important;
+	left: auto !important;
+	opacity: 0 !important;
+}
+
+/* end */
+
+.mapContent {
+	width: 100%;
+	height: 100%;
+}
+
+.fn_title>h1 {
+	width: 300px;
+	height: 76px;
+	/* background: #00a8bd; */
+	/* border-radius: 0px 0px 80px 0px; */
+	background: linear-gradient(-45deg, transparent 25px, #083977 0)bottom right,
+		linear-gradient(-135deg, transparent 0, #083977 0)top right,
+		linear-gradient(135deg, transparent 0, #083977 0)top left,
+		linear-gradient(45deg, transparent 0, #083977 0)bottom left;
+	background-size: 50% 50%;
+	background-repeat: no-repeat;
+	text-align: left;
+	line-height: 66px;
+	color: white;
+	padding-left: 20px;
+}
+
+/* 时间 */
+.time {
+	position: absolute;
+	display: flex;
+	padding: 0.7rem 0;
+	top: 1%;
+	right: 0%;
+	height: 100%;
+	width: auto;
+	color: white;
+	font-size: 1.5rem;
+	line-height: 32px;
+	background-image: -webkit-linear-gradient(bottom, #465984, #def2ff, #ffffff);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-weight: 600;
+	padding-right: 25px;
+}
+
+.t2 {
+	margin: 0 0.5rem;
+}
+
+.dipan {
+	position: fixed;
+	bottom: 0%;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 70%;
+	height: 200px;
+	background: rgba(0, 0, 0, 0.43137254901960786);
+	border-radius: 20px;
+	transform: rotateX(77deg);
+	box-shadow: 1px 20px 13px -5px rgb(107, 107, 107);
+}
+
+.rot {
+	position: fixed;
+	bottom: 95px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: 70%;
+	height: 50px;
+	border-radius: 20px;
+}
+
+.oo {
+	width: 50px;
+	height: 50px;
+	background: #FF5722;
+	border-radius: 50%;
+	float: left;
+	margin-right: 15px;
+}
+
+/* 头部 */
+header {
+	position: fixed;
+	width: 100%;
+	height: 50px;
+	background: linear-gradient(45deg, #083977, #092978);
+	top: 0;
+	left: 0;
+	z-index: 999;
+}
+
+.wgMessage {
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: auto;
+	left: 300px;
+}
+
+.wgMessageBox {
+	display: block;
+	height: 100%;
+}
+
+.wgMessageBox>li {
+	display: inline-block;
+	line-height: 50px;
+	padding: 0 10px 0 0;
+	background-image: -webkit-linear-gradient(bottom, #465984, #def2ff, #ffffff);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.wgMessageBox>li:nth-child(1) {
+	padding: 0 0 0 10px;
+}
+
+.wgMessageBox>li:nth-child(1)>h2 {
+	/* background-image: -webkit-linear-gradient(bottom, #465984, #def2ff, #ffffff); */
+	background-image: -webkit-linear-gradient(bottom, #ffffff, #4bc7ff, #00affe);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-size: 20px;
+}
+
+.wgMessageBox>li>h3 {
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.wgMessageBox>li>h3>span {
+	background-image: -webkit-linear-gradient(bottom, #465984, #00ffff, #00ffff);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+/* 搜索 */
+.typeSerech {
+	position: fixed;
+	top: 85px;
+	left: 110px;
+	width: auto;
+	height: 40px;
+	background: unset;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.typeSerech>input {
+	height: 100% !important;
+	width: 22.5rem !important;
+	border: none !important;
+	outline: none !important;
+	padding-right: 60px !important;
+}
+
+.inSerch {
+	position: absolute;
+	width: 50px;
+	height: 100%;
+	background: linear-gradient(115deg, #2c4b88, #2a58b4);
+	color: #fff;
+	line-height: 40px;
+	text-align: center;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+}
+
+/* end */
+
+/* 功能表 */
+.fnlismin {
+	position: fixed;
+	width: 76px;
+	height: 70%;
+	/* 	background: #366097; */
+	bottom: 0;
+	top: 5%;
+	left: 20px;
+	margin: auto;
+}
+
+.fnlisbig {
+	position: fixed;
+	width: 96px;
+	height: 70%;
+	bottom: 0;
+	top: 5%;
+	right: 20px;
+	margin: auto;
+}
+
+.fnlisminBox {
+	display: block;
+	width: 100%;
+	height: 100%;
+	/* 				overflow-x: hidden;
+						overflow-y: auto; */
+	padding-right: 20px;
+}
+
+.fnlisbigBox {
+	display: block;
+	width: 100%;
+	height: 100%;
+	/* 				overflow-x: hidden;
+						overflow-y: auto; */
+}
+
+.fnlisbigBox li {
+	position: relative;
+	display: block;
+	width: 70px;
+	height: 70px;
+	border-radius: 50%;
+	background: linear-gradient(115deg, #2c4b88, #2a58b4);
+	margin-bottom: 15px;
+	cursor: pointer;
+}
+
+.fnlisbigBox li>span {
+	display: block;
+	position: absolute;
+	color: #fff;
+	text-align: center;
+	line-height: 70px;
+	font-size: 18px;
+	z-index: 58;
+	width: 100%;
+}
+
+.fnlisbigBox li:hover {
+	background: linear-gradient(130deg, #FF9800, #fea900);
+}
+
+.fnlisminBox li {
+	position: relative;
+	display: block;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	/* background: #083977b0; */
+	background: linear-gradient(115deg, #2c4b88, #2a58b4);
+	margin-bottom: 15px;
+	cursor: pointer;
+}
+
+.fnlisminBox li>span {
+	display: block;
+	position: absolute;
+	color: #fff;
+	text-align: center;
+	line-height: 60px;
+	font-size: 14px;
+	z-index: 58;
+	width: 100%;
+}
+
+.fnlisminBox li:hover {
+	background: linear-gradient(130deg, #FF9800, #fea900);
+}
+
+/* 地图 */
+.amap-marker-label {
+	width: auto;
+	padding: 5px 10px;
+	font-size: 16px;
+	line-height: 18px;
+	text-align: center;
+	height: auto;
+	font-family: STLiti;
+	color: #fff;
+	border-radius: 7px;
+	background-color: rgba(255, 255, 255, 0.4);
+	border: solid 2px rgba(100, 255, 200, 0.8);
+	background: #35738eed;
+	border: 2px solid;
+}
+
+/* 聚合头部标注 */
+.jhmessage {
+	position: absolute;
+	top: -45px;
+	left: -14px;
+	color: rgb(0, 0, 0);
+	white-space: nowrap;
+	background: #888;
+	padding: 0 10px;
+	font-size: 17px;
+	line-height: 35px;
+	border: 2px solid #fff;
+	color: #fff;
+	border-radius: 7px;
+}
+
+/* 左侧菜单 */
+.fnlisminBox li:hover p {
+	display: block;
+	animation: asd 0.5s linear forwards;
+}
+
+.fnlisminBox .pitch_on_chile:hover::before {
+	content: '';
+	position: absolute;
+	display: block;
+	width: 0;
+	height: 0;
+	border-top: 7px solid transparent;
+	border-right: 12px solid #19e5ff;
+	border-bottom: 7px solid transparent;
+	top: 0;
+	bottom: 0;
+	right: -5px;
+	margin: auto;
+	z-index: 99;
+	animation: asdlen 1s linear forwards;
+}
+
+.fnlisminBox li::after {
+	content: '';
+	position: absolute;
+	width: 85%;
+	height: 85%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	/* background: linear-gradient(45deg, #00BCD4, transparent); */
+	background: linear-gradient(45deg, #133d71, #133d71);
+	border-radius: 50%;
+	/* box-shadow: 0px -1px 4px #f0f0f0; */
+}
+
+.fnlisminBox li>p {
+	position: absolute;
+	z-index: 1000;
+	/* top: 55%;
+				margin-top: -100%; */
+	width: 120px;
+	height: auto;
+	border-radius: 2px;
+	animation: asd2 1s linear forwards;
+	left: 0;
+	display: none;
+	z-index: 9;
+	padding-left: 10px;
+}
+
+.fnlisminBox li>p>em {
+	display: block;
+	width: 120px;
+	line-height: 35px;
+	text-align: center;
+	/* background-color: #009F95; */
+	background: linear-gradient(7deg, #00168e, #3f4c92);
+	color: #fff;
+}
+
+.fnlisminBox li>p>em:hover {
+	/* background-color: #1E9FFF; */
+	background: linear-gradient(45deg, #779cad, #fff);
+	color: #eb29f2;
+}
+
+.emActiveOn {
+	background: linear-gradient(45deg, #779cad, #fff) !important;
+	color: #eb29f2 !important;
+}
+
+.pitch_on {
+	/* background: #29a82e78 !important; */
+	background: linear-gradient(130deg, #FF9800, #fea900) !important;
+}
+
+.pitch_on::after {
+	content: '' !important;
+	position: absolute !important;
+	width: 80%;
+	height: 80%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	/* background: linear-gradient(-83deg, #ff9800, #ffe500) !important; */
+	background: linear-gradient(130deg, #FFC107, #f98a05) !important;
+	border-radius: 50%;
+	/* box-shadow: 0px -1px 4px #f0f0f0; */
+}
+
+/* 右侧菜单 */
+.fnlisbigBox li:hover p {
+	display: block;
+	animation: asd3 0.5s linear forwards;
+}
+
+.fnlisbigBox li:hover::before {
+	content: '';
+	position: absolute;
+	display: block;
+	width: 0;
+	height: 0;
+	border-top: 7px solid transparent;
+	border-left: 12px solid #19e5ff;
+	border-bottom: 7px solid transparent;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	z-index: 99;
+}
+
+.fnlisbigBox li::after {
+	content: '';
+	position: absolute;
+	width: 85%;
+	height: 85%;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background: linear-gradient(45deg, #133d71, #133d71);
+	border-radius: 50%;
+	/* box-shadow: 0px -1px 4px #f0f0f0; */
+}
+
+.fnlisbigBox li>p {
+	position: absolute;
+	z-index: 1000;
+	/* top: 55%;
+				margin-top: -100%; */
+	width: auto;
+	height: auto;
+	border-radius: 2px;
+	animation: asd4 1s linear forwards;
+	right: 0;
+	display: none;
+	z-index: 9;
+	padding-right: 20px;
+}
+
+.fnlisbigBox li>p>em {
+	display: block;
+	width: 120px;
+	line-height: 35px;
+	text-align: center;
+	background: linear-gradient(7deg, #00168e, #3f4c92);
+	color: #fff;
+}
+
+.fnlisbigBox li>p>em:hover {
+	background: linear-gradient(45deg, #779cad, #fff);
+	color: #eb29f2;
+}
+
+@keyframes asdlen {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1
+	}
+}
+
+@keyframes asd {
+	0% {
+		left: 30px;
+		opacity: 0;
+
+	}
+
+	100% {
+		left: 60px;
+		opacity: 1
+	}
+}
+
+@keyframes asd2 {
+	0% {
+		left: 50px;
+		opacity: 1;
+	}
+
+	10% {}
+
+	100% {
+		left: 0px;
+		opacity: 0;
+	}
+}
+
+
+@keyframes asd3 {
+	0% {
+		right: 50px;
+		opacity: 0
+	}
+
+	100% {
+		right: 66px;
+		opacity: 1
+	}
+}
+
+@keyframes asd4 {
+	0% {
+		right: 70px;
+		opacity: 1;
+	}
+
+	10% {
+		right: 30px;
+		opacity: 0;
+	}
+
+	100% {
+		right: 0px;
+		display: none;
+	}
+}
+
+/* 底部功能 */
+.butFNlis {
+	position: fixed;
+	width: 40%;
+	height: 100px;
+	background: linear-gradient(45deg, #b3b3b3, #e6dede);
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	transform: rotateX(115deg);
+	border-radius: 10px;
+	box-shadow: -3px -14px 20px #aebecb;
+	overflow: hidden;
+	display: none;
+}
+
+.butFNlisBox {
+	position: fixed;
+	width: 38%;
+	height: 100px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	display: none;
+}
+
+.butFNlisBox>li {
+	position: relative;
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	background: lightblue;
+	margin-right: 15px;
+	cursor: pointer;
+	transition: all 0.5s ease-out;
+	box-shadow: inset 0px -2px 0px #99acb5;
+}
+
+.butFNlisBox>li::before {
+	position: absolute;
+	content: attr(data-title);
+	bottom: -40%;
+	text-align: center;
+	width: 100%;
+	font-size: 14px;
+	color: snow;
+}
+
+.butFNlisBox>li:hover {
+	transform: scale(1.2);
+}
+
+
+/* 地图显示选项 */
+.mapOption {
+	position: fixed;
+	display: flex;
+	width: 85px;
+	height: 30px;
+	background: #fff;
+	right: 20px;
+	bottom: 100px;
+	border-radius: 3px;
+	line-height: 30px;
+	text-align: center;
+	overflow: hidden;
+	box-shadow: 4px 3px 10px #ececec;
+}
+
+.mapOption>li {
+	flex: 1;
+	cursor: pointer;
+}
+
+.mapOptionOn {
+	background: #007DDB;
+	color: #fff;
+}
+
+/* 个别功能 */
+.gbFnLis {
+	position: fixed;
+	width: auto;
+	height: 40px;
+	right: 20px;
+	bottom: 20px;
+	min-width: 450px;
+	overflow: hidden;
+	overflow-x: auto;
+	white-space: nowrap;
+}
+
+.gbFnLis>li {
+	display: inline-block;
+	line-height: 32px;
+	padding: 0 15px;
+	border-radius: 20px;
+	/* background: linear-gradient(165deg, #00b0ff, #3F51B5); */
+	/* background: linear-gradient(198deg, #00BCD4, #3f51b5d1); */
+	background: #246ac5;
+	cursor: pointer;
+	margin-right: 15px;
+	color: #fff;
+	font-size: 14px;
+}
+
+.gbfnActive {
+	background: linear-gradient(45deg, #FFEB3B, #FFB74D) !important;
+}
+
+/* 生成的列表 */
+.exg {
+	text-align: center;
+	line-height: 30px;
+	background: #d6dade;
+}
+
+.exg:hover {
+	transform: scale(1.5);
+	background: #00B0FF;
+	color: #fff;
+	cursor: pointer;
+}
+
+/*修改滚动条样式*/
+div::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+	/**/
+}
+
+div::-webkit-scrollbar-track {
+	background: rgb(239, 239, 239);
+	border-radius: 2px;
+}
+
+div::-webkit-scrollbar-thumb {
+	background: #bfbfbf;
+	border-radius: 10px;
+}
+
+div::-webkit-scrollbar-thumb:hover {
+	background: #008EFF;
+}
+
+div::-webkit-scrollbar-corner {
+	background: #179a16;
+}
