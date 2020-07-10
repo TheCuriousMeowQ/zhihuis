@@ -909,7 +909,9 @@
 				var box = document.getElementById(el);
 				$(box).html('');
 				if (typeof data !== 'object') {
-					var div = `<div class="swiper-slide"><img src="${data}"></div>`;
+					var div = `<div class="swiper-slide">
+						<span style="position: absolute;top: 0;color: #fff;background: rgba(43, 51, 58, 0.45);width: 95%;line-height: 30px;padding-left: 5%;">2020/05/13 周三 12:30:00</span>
+					<img src="${data}"></div>`;
 					$(box).append(div);
 				} else {
 					for (let i = 0; i < data.length; i++) {}
