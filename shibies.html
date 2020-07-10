@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="layui-v2.5.6/layui/css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="css/scrollbar.css" />
+		<link rel="stylesheet" type="text/css" href="css/swiper.min.css" />
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+			}
+
+			.identificationBox {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				background: url(img/shibies/bg.png) no-repeat;
+				background-size: 100% 100%;
+			}
+
+			.identificationTab {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				display: flex;
+			}
+
+			.identificationTab>li {
+				flex: 1;
+				margin: 10px;
+				/* background-color: #0067B9; */
+			}
+
+			.gatherCont,
+			.perosonMsgCont {
+				display: flex;
+				flex-direction: column;
+				width: 100%;
+				height: 100%;
+			}
+
+			.gatherCont>li:nth-child(1),
+			.perosonMsgCont>li:nth-child(1) {
+				height: 40px;
+				text-align: center;
+				line-height: 40px;
+				background: linear-gradient(180deg, rgba(48, 103, 159, 0.8509803921568627), rgba(43, 52, 99, 0.5098039215686274));
+				color: #fff;
+				border-radius: 3px;
+			}
+
+			.gatherCont>li:nth-child(2),
+			.perosonMsgCont>li:nth-child(2) {
+				flex: 1.2;
+				padding: 15px;
+				overflow: hidden;
+			}
+
+			.gatherCont>li:nth-child(3),
+			.perosonMsgCont>li:nth-child(3) {
+				flex: 1;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.gatherImg {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				border-radius: 3px;
+				overflow: hidden;
+			}
+
+			.swiper-container {
+				width: 100%;
+				height: 100%;
+			}
+
+			.gatherImg img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+
+			.opt-title {
+				height: 40px;
+				text-align: center;
+				line-height: 40px;
+				background: linear-gradient(180deg, rgba(48, 103, 159, 0.8509803921568627), rgba(43, 52, 99, 0.5098039215686274));
+				color: #fff;
+				border-radius: 3px;
+			}
+
+			.gatherCont>li:nth-child(3)>div:nth-child(2) {
+				flex: 1;
+			}
+
+			.guijiList {
+				display: flex;
+				flex-direction: column;
+				overflow: auto;
+			}
+
+			.guijiList>div {
+				margin: 0 0 10px 0;
+				overflow: hidden;
+				text-overflow:ellipsis;
+				white-space: nowrap;
+			}
+
+			.guijiList>div:hover {
+				opacity: 0.8;
+			}
+
+			.identificationImglist {
+				display: flex;
+				width: 100%;
+				height: 55%;
+			}
+
+			.identificationImglist>div {
+				position: relative;
+				/* background: #0067B9; */
+				margin-right: 10px;
+				flex: 1;
+			}
+
+			.identificationImglist>div>img {}
+
+			.identificationImglist>div:nth-child(2)>.imgMsg {
+				border: none;
+			}
+
+			.imgMsg {
+				position: absolute;
+				width: 135px;
+				height: 135px;
+				top: 0;
+				bottom: -10%;
+				left: 0;
+				right: 0;
+				margin: auto;
+				border: 10px solid rgba(0, 188, 212, 0.18823529411764706);
+			}
+
+			.imgMsg::after {
+				position: absolute;
+				content: attr(data-tit);
+				font-size: 14px;
+				color: white;
+				width: 100%;
+				left: 0;
+				right: 0;
+				top: -35px;
+				margin: auto;
+				text-align: center;
+			}
+
+			/* 	.imgMsg::before {
+				position: absolute;
+				content: '';
+				width: 10px;
+				height: 10px;
+				background: #fff;
+				left: 0;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+			} */
+
+			.imgMsg>img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+
+			.ps-time {
+				position: absolute;
+				width: 100%;
+				position: absolute;
+				top: 0;
+				color: #fff;
+				background: #12253691;
+				font-size: 10px;
+			}
+
+			.peilv::after {
+				position: absolute;
+				content: attr(data-plv);
+				width: auto;
+				height: 20px;
+				top: 15%;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				margin: auto;
+				color: #00e2ff;
+				font-size: 20px;
+				text-align: center;
+			}
+
+			.identificationImglist>div:last-child {
+				margin-right: 0;
+			}
+
+
+			.perosonMsgList,
+			.ky-perosonMsgList {
+				width: 100%;
+				height: 45%;
+				display: grid;
+				grid-template-columns: 50% 50%;
+				grid-template-rows: 33.33%;
+				grid-auto-flow: row;
+			}
+
+			.perosonMsgList {
+				display: none;
+			}
+
+			.perosonMsgListNo {
+				width: 100%;
+				height: 45%;
+				display: grid !important;
+				grid-template-columns: 50% 50%;
+				grid-template-rows: 33.33%;
+				grid-auto-flow: row;
+			}
+
+
+			/* .ky-perosonMsgList {
+				display: none;
+			} */
+
+			.perosonMsgList>div,
+			.ky-perosonMsgList>div {
+				position: relative;
+				/* background-color: #0067B9; */
+				line-height: 50px;
+				padding-left: 10px;
+				color: #cacaca;
+			}
+
+			.perosonMsgList>div>span,
+			.ky-perosonMsgList>div>span {
+				color: #fff;
+				padding: 5px 10px;
+				border-radius: 3px;
+				background: #00bcd414;
+			}
+
+			.perosonMsgList>div:nth-child(1),
+			.ky-perosonMsgList>div:nth-child(1) {
+				grid-column-start: 1;
+				grid-column-end: 3;
+			}
+
+			.perosonMsgList>div:nth-child(1)::after {
+				position: absolute;
+				content: '';
+				width: 100%;
+				height: 1px;
+				background: #337897;
+				left: 0;
+				bottom: 5px;
+			}
+
+			.ky-perosonMsgList>div:nth-child(3) {
+				grid-column-start: 1;
+				grid-column-end: 3;
+				text-align: center;
+				border: 2px solid rgba(39, 118, 181, 0.5098039215686274);
+				border-radius: 5px;
+				height: 40px;
+				line-height: 40px;
+				cursor: not-allowed;
+			}
+
+			.ky-perosonMsgList>div:nth-child(3)>span {
+				position: relative;
+				margin-left: 25px;
+			}
+
+			.ky-perosonMsgList>div:nth-child(3)>span::after {
+				position: absolute;
+				content: '';
+				width: 15px;
+				height: 15px;
+				background: url(img/shibies/rg.png) no-repeat;
+				background-size: 100% 100%;
+				left: -25px;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+			}
+
+			.gj-listcont {
+				color: #fff;
+				line-height: 35px;
+				border-radius: 2px;
+			}
+
+			.gj-listcont>span {
+				position: relative;
+				margin-left: 40px;
+			}
+
+			.gj-listcont>span::after {
+				position: absolute;
+				content: '';
+				width: 20px;
+				height: 15px;
+				background: url(./img/shibies/gj.png) no-repeat;
+				top: 0;
+				bottom: 0;
+				left: -30px;
+				margin: auto;
+				background-size: 100% 100%;
+			}
+
+			.tabli {
+				display: flex;
+			}
+
+			.tabli>li {
+				position: relative;
+				flex: 1;
+				/* margin: 0 5px; */
+				color: #fff;
+				line-height: 25px;
+				text-align: center;
+				border-bottom: 2px solid #124d7c;
+			}
+
+			.tabli-active {
+				color: #4bebff !important;
+			}
+
+			.tabli-active::after {
+				position: absolute;
+				content: '';
+				width: 50%;
+				height: 2px;
+				background-color: #4bebff;
+				left: 0;
+				right: 0;
+				bottom: -2px;
+				margin: auto;
+			}
+
+			.tabli>li:hover {
+				cursor: pointer;
+				opacity: 0.8;
+			}
+
+			.datali,
+			.keyi-datali {
+				flex: 1;
+				padding: 10px;
+			}
+
+			.dataliCont {
+				width: 100%;
+				height: 58%;
+				overflow: auto;
+				padding-top: 2%;
+			}
+
+			.imgcont {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: row;
+				overflow: auto;
+			}
+
+			.pagecont {
+				width: 100%;
+				height: 20%;
+			}
+
+			.personImage {
+				position: relative;
+				width: 72px;
+				height: 72px;
+				overflow: hidden;
+				margin-right: 5px;
+				margin-bottom: 5px;
+				border-right: 2px solid rgba(255, 255, 255, 0.52);
+				border-bottom: 2px solid rgba(255, 255, 255, 0.52);
+			}
+
+			.personImage>img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+
+			/* 修改框架tab样式 */
+			.layui-tab {
+				margin: 0;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.layui-tab-content {
+				flex: 1;
+			}
+
+			.layui-tab-title {
+				display: flex;
+				border: none;
+			}
+
+			.layui-tab-item {
+				height: 100%;
+			}
+
+			.layui-layer-title {
+				background-color: #00F7DE;
+			}
+
+			.layui-tab-title li {
+				flex: 1;
+				padding: 0;
+				margin: 0 15px;
+				background: url(img/shibie/dh_off.png) no-repeat;
+				background-size: 100% 100%;
+				color: #8d8f98;
+			}
+
+			.layui-tab-brief>.layui-tab-title .layui-this {
+				background: url(img/shibie/dh_no.png) no-repeat;
+				background-size: 100% 100%;
+				color: #fff;
+			}
+
+			.layui-tab-brief>.layui-tab-more li.layui-this:after,
+			.layui-tab-brief>.layui-tab-title .layui-this:after {
+				display: none;
+			}
+
+			.pageCode {
+				position: absolute;
+				bottom: 5%;
+				right: 0;
+			}
+
+			.layui-laypage a,
+			.layui-laypage span {
+				color: rgba(255, 255, 255, 0.2);
+				background: none;
+				border: 1px solid #1a2144;
+			}
+
+			.layui-laypage a,
+			.layui-laypage button,
+			.layui-laypage input,
+			.layui-laypage select,
+			.layui-laypage span {
+				border: 1px solid rgba(255, 255, 255, 0.2);
+				background: none;
+				color: rgba(255, 255, 255, 0.2);
+			}
+
+			.layui-laypage input:hover {
+				color: #fff;
+			}
+
+			.layui-laypage button:hover {
+				color: #fff;
+				border: 1px solid #fff;
+			}
+
+			.layui-input-time {
+				background-color: #000936;
+				border: none;
+				height: 100%;
+				text-align: center;
+				color: #1b9ec4;
+			}
+
+			/* end */
+
+			.screchbox {
+				width: 100%;
+				height: 20%;
+			}
+
+			.identification_contents_option {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				line-height: 40px;
+				/* background: url(img/shibie/dhl.png) no-repeat; */
+				background-size: 100% 100%;
+				padding-left: 20px;
+				color: #2eeeef;
+				background: #060f39;
+			}
+
+			.timeYbtn {
+				height: 90%;
+				width: auto;
+				padding: 0 10px;
+				border: none;
+				outline: none;
+				cursor: pointer;
+				color: rgba(46, 238, 255, 0.5);
+				background: #000936;
+				border-radius: 5px;
+			}
+
+			.timeYbtn:hover {
+				color: #1b9ec4;
+				border: 1px solid #1b9ec4;
+			}
+
+			.timeYbtn>span {
+				position: relative;
+				margin-left: 12px;
+			}
+
+			.timeYbtn>span::after {
+				position: absolute;
+				content: '';
+				width: 10px;
+				height: 10px;
+				background: url(img/shibie/serch.png) no-repeat;
+				background-size: 100% 100%;
+				left: -15px;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+			}
+
+			.querendan {
+				display: none;
+				overflow: auto;
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="identificationBox">
+			<ul class="identificationTab">
+				<li class="gatherMsg">
+					<ul class="gatherCont">
+						<li>现场采集</li>
+						<li>
+							<div class="gatherImg">
+								<div class="swiper-container">
+									<div id="swiperWrapper" class="swiper-wrapper">
+										<div class="swiper-slide"><img src="img/shibies/1.jpg"></div>
+										<div class="swiper-slide"><img src="img/shibies/2.jpg"></div>
+										<div class="swiper-slide"><img src="img/shibies/3.jpg"></div>
+									</div>
+								</div>
+								<!-- 如果需要导航按钮 -->
+								<div class="swiper-button-prev"></div>
+								<div class="swiper-button-next"></div>
+							</div>
+						</li>
+						<li style="display: block;overflow: auto;">
+
+							<!-- 确认列表 -->
+							<div class="querendan">
+								<div class="opt-title">轨迹</div>
+								<div id="qr-guijiList" class="guijiList" style="height: 80%;overflow: auto;margin-top: 10px;">
+									<div class="gj-listcont">
+										<span>东凤</span>
+									</div>
+								</div>
+							</div>
+
+							<!-- 可疑列表 -->
+							<style type="text/css">
+								.keyibox {
+									position: relative;
+									width: 100%;
+									height: 100%;
+									overflow: hidden;
+								}
+
+								.keyiopli {
+									display: flex;
+								}
+
+								.keyiopli>li {
+									flex: 1;
+								}
+
+								.keyiopli>li:nth-child(1) {
+									margin-right: 10px;
+								}
+							</style>
+							<div class="keyibox">
+
+								<ul id="keyiopli" class="keyiopli">
+									<li>
+										<div class="opt-title">出现频次</div>
+										<div id="keyi-pingci" class="guijiList" style="height: 80%;overflow: auto;margin-top: 10px;"></div>
+									</li>
+									<li>
+										<div class="opt-title">轨迹</div>
+										<div id="ky-guijiList" class="guijiList" style="height: 80%;overflow: auto;margin-top: 10px;"></div>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</li>
+				<li class="perosonMsg">
+					<ul class="perosonMsgCont">
+						<li>身份信息</li>
+						<li>
+							<div class="identificationImglist">
+								<div>
+									<!-- 拍摄信息 -->
+									<div id="psMsg" data-tit="拍摄信息" class="imgMsg xc-imgMsg">
+										<img src="img/shibies/1.jpg">
+									</div>
+								</div>
+								<div>
+									<!-- 匹配率 -->
+									<div id="peilv" class="imgMsg peilv" data-plv="100%">
+										<img src="img/shibies/pipeibg.png">
+									</div>
+								</div>
+								<div>
+									<!-- 信息来源 -->
+									<div id="lyMsg" data-tit="" class="imgMsg lr-imgMsg">
+										<img src="img/shibies/1.jpg">
+									</div>
+								</div>
+							</div>
+							<!-- 确认信息 -->
+							<div class="perosonMsgList">
+								<div class="pl">人员信息</div>
+								<div class="pl">拍摄时间：<span id="pssj">2020/06/29 10:07:09</span></div>
+								<div class="pl">姓名：<span id="xm">张栋</span></div>
+								<div class="pl">所属楼栋：<span id="ssld">十景花园</span></div>
+								<div class="pl">所属房屋：<span id="ssfw">303</span></div>
+							</div>
+							<!-- 可疑信息 -->
+							<div class="ky-perosonMsgList">
+								<div class="pl">人员信息</div>
+								<div class="pl">拍摄时间：<span>2020/06/29 10:07:09</span></div>
+								<div class="pl"><span>人工判断</span></div>
+							</div>
+						</li>
+						<li>
+							<ul class="tabli">
+								<li class="tabli-active" onclick="keyi()">可疑人员名单</li>
+								<li onclick="queren()">身份确认人员名单</li>
+							</ul>
+
+							<div class="keyi-datali">
+								<div class="screchbox">
+									<div class="identification_contents_option">
+										<span>拍摄时间筛选：</span>
+										<div class="layui-input-inline" style="width: 280px;height: 100%;">
+											<input type="text" class="layui-input layui-input-time" id="test9" placeholder="开始时间 - 结束时间">
+										</div>
+										<button type="button" class="timeYbtn"><span>确定</span></button>
+									</div>
+								</div>
+								<div id="dataliCont" class="dataliCont">
+									<div id="keyi-imglist" class="imgcont">
+										<div class="personImage">
+											<img src="img/shibies/1-1.png">
+											<div class="ps-time">2020/06/21 10:06:33</div>
+										</div>
+										<div class="personImage">
+											<img src="img/shibies/2-1.png">
+											<div class="ps-time">2020/06/21 10:06:33</div>
+										</div>
+										<div class="personImage">
+											<img src="img/shibies/3-1.png">
+											<div class="ps-time">2020/06/21 10:06:33</div>
+										</div>
+									</div>
+								</div>
+								<div id="keyi-pagecont" class="pagecont"></div>
+							</div>
+
+							<div class="datali" style="display: none;">
+								<div class="screchbox">
+									<div class="identification_contents_option">
+										<span>拍摄时间筛选：</span>
+										<div class="layui-input-inline" style="width: 280px;height: 100%;">
+											<input type="text" class="layui-input layui-input-time" id="test10" placeholder="开始时间 - 结束时间">
+										</div>
+										<button type="button" class="timeYbtn"><span>确定</span></button>
+									</div>
+								</div>
+								<div id="dataliCont" class="dataliCont">
+									<div id="qr-imglist" class="imgcont">
+										<div class="personImage">
+											<img src="img/shibies/1-1.png">
+											<div class="ps-time">2020/06/21 10:06:33</div>
+										</div>
+										<div class="personImage">
+											<img src="img/shibies/2-1.png">
+											<div class="ps-time">2020/06/21 10:06:33</div>
+										</div>
+										<div class="personImage">
+											<img src="img/shibies/3-1.png">
+											<div class="ps-time">2020/06/21 10:06:33</div>
+										</div>
+									</div>
+								</div>
+								<div id="pagecont" class="pagecont"></div>
+							</div>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<script src="jq/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="layui-v2.5.6/layui/layui.all.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mock.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var Mock = Mock.mock('https://dizhi.com', {
+				'list|12': [{ //随机生成20条数据
+					'id|+1': 1, //id自增
+					'name': '@cword(15)',
+					'icon': '',
+					'typefn': '@last'
+				}]
+			});
+
+			layui.use(['laypage', 'laydate', 'layer'], function() {
+				var laypage = layui.laypage,
+					laydate = layui.laydate,
+					layer = layui.layer;
+				laypage.render({
+					elem: 'pagecont',
+					count: 10,
+					theme: '#4caf50ab',
+					layout: ['prev', 'page', 'next', 'count', 'skip'],
+					jump: function(obj) {
+						console.log(obj)
+					}
+				});
+
+				laypage.render({
+					elem: 'keyi-pagecont',
+					count: 10,
+					theme: '#4caf50ab',
+					layout: ['prev', 'page', 'next', 'count', 'skip'],
+					jump: function(obj) {
+						console.log(obj)
+					}
+				});
+
+				//日期时间范围
+				laydate.render({
+					elem: '#test9',
+					type: 'datetime',
+					format: 'yyyy-MM-dd HH:mm',
+					range: true
+				});
+
+				laydate.render({
+					elem: '#test10',
+					type: 'datetime',
+					format: 'yyyy-MM-dd HH:mm',
+					range: true
+				});
+			});
+
+			//可疑的图片点击
+			$('#keyi-imglist').on('click', '.personImage', function() {
+				var idx = $(this).index();
+				var _thatImg = $(this).find('img').attr('src');
+				$('#psMsg').html('');
+				$('#lyMsg').html('');
+				$('#psMsg').html('<img src=' + _thatImg + ' />');
+				$('#lyMsg').html(
+					'<div style="width: 100%;height: 100%;background: rgba(106, 184, 255, 0.5490196078431373);text-align: center;line-height: 120px;color: white;">无匹配信息</div>'
+				);
+				$('#lyMsg').attr('data-tit', '无录入数据');
+				$.get('js/person.json', '', function(res) {
+					// console.log(res[0].list);
+					var data = res[0].list;
+					for (let i = 0; i < data.length; i++) {
+						console.log(data[i].idx)
+						if (idx == data[i].idx) {
+							guiji('ky-guijiList', data[i].guiji);
+							lunbo('swiperWrapper', data[i].maximg);
+							pingci('keyi-pingci', data[i].pingci);
+						}
+					}
+				}, 'json');
+			});
+
+			// 确认信息点击
+			$('#qr-imglist').on('click', '.personImage', function() {
+				var idx = $(this).index();
+				var _thatImg = $(this).find('img').attr('src');
+				$('#psMsg').html('');
+				$('#lyMsg').html('');
+				$('#psMsg').html('<img src=' + _thatImg + ' />');
+				$('#lyMsg').attr('data-tit', '录入数据');
+				$.get('js/person.json', '', function(res) {
+					// console.log(res[0].list);
+					var data = res[1].list;
+					for (let i = 0; i < data.length; i++) {
+						console.log(data[i].idx)
+						if (idx == data[i].idx) {
+							guiji('qr-guijiList', data[i].guiji);
+							lunbo('swiperWrapper', data[i].maximg);
+							$('#lyMsg').html(`<img src="${data[i].img}"/>`);
+							$('#peilv').attr('data-plv', data[i].pv);
+							
+							$('#pssj').html('').html(data[i].time);
+							$('#xm').html('').html(data[i].xm);
+							$('#ssld').html('').html(data[i].ld);
+							$('#ssfw').html('').html(data[i].fw);
+						}
+					}
+				}, 'json');
+			});
+
+			$('.tabli').on('click', 'li', function(e) {
+				$(this).addClass('tabli-active').siblings().removeClass('tabli-active');
+			});
+
+
+			function keyi() {
+				$('.querendan').hide();
+				$('.perosonMsgList').hide();
+				$('.perosonMsgList').removeClass('perosonMsgListNo');
+				$('.keyibox').show();
+				$('.ky-perosonMsgList').show();
+
+				$('.datali').hide();
+				$('.keyi-datali').show();
+
+				$('.peilv').attr('data-plv', '无');
+				$('.lr-imgMsg').find('img').attr('src', '');
+				$('#keyi-imglist').find('.personImage')[0].click();
+			}
+			
+			keyi();
+
+			function queren() {
+				$('.querendan').show();
+				$('.perosonMsgList').show();
+				$('.perosonMsgList').addClass('perosonMsgListNo');
+
+				$('.keyibox').hide();
+				$('.ky-perosonMsgList').hide();
+				$('.peilv').attr('data-plv', '100%');
+
+				$('.datali').show();
+				$('.keyi-datali').hide();
+				$('#qr-imglist').find('.personImage')[0].click();
+			}
+
+			// 轨迹渲染
+			function guiji(el, data) {
+				var box = document.getElementById(el);
+				$(box).html('');
+				for (let i = 0; i < data.length; i++) {
+					var div = `<div class="gj-listcont">
+									<span>${data[i]}</span>
+								</div>`;
+					$(box).append(div)
+				}
+
+				var guijiListchile = box.children;
+				for (let i = 0; i < guijiListchile.length; i++) {
+					if (i % 2) {
+						guijiListchile[i].style.background = 'rgba(25, 72, 109, 0.39)';
+					} else {
+						guijiListchile[i].style.background = 'rgba(64, 64, 115, 0.39)';
+					}
+				}
+			}
+			// 频次渲染
+			function pingci(el, data) {
+				var box = document.getElementById(el);
+				$(box).html('');
+				for (let i = 0; i < data.length; i++) {
+					var div = `<div class="gj-listcont">
+									<span>2020-05-12 共${data[i]}次</span>
+								</div>`;
+					$(box).append(div)
+				}
+			}
+
+			// 轮播数据
+			function lunbo(el, data) {
+				var box = document.getElementById(el);
+				$(box).html('');
+				if (typeof data !== 'object') {
+					var div = `<div class="swiper-slide"><img src="${data}"></div>`;
+					$(box).append(div);
+				} else {
+					for (let i = 0; i < data.length; i++) {}
+				}
+
+				var mySwiper = new Swiper('.swiper-container', {
+					direction: 'vertical', // 垂直切换选项
+					loop: true, // 循环模式选项
+					// 如果需要前进后退按钮
+					navigation: {
+						nextEl: '.swiper-button-next',
+						prevEl: '.swiper-button-prev',
+					}
+				});
+			}
+		</script>
+	</body>
+</html>
